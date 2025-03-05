@@ -28,7 +28,7 @@
                     Réinitialiser le Mot de Passe
                 </h1>
             </div>
-            <form class="p-8 space-y-6" action="{{ route('resetpassword') }}" method="POST">
+            <form class="p-8 space-y-6" action="{{ route('password.email') }}" method="POST">
                 @csrf            
                 <p class="text-gray-600 text-center mb-4">
                     Entrez votre email pour recevoir un lien de réinitialisation

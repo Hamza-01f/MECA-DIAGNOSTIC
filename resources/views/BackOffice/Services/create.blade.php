@@ -22,20 +22,28 @@
                     <h2 class="text-xl font-semibold text-gray-700">Services Rapides</h2>
                     <span class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">5 Types</span>
                 </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-oil-can text-blue-500 mr-3"></i>
-                        <span>Vidange</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-car-side text-blue-500 mr-3"></i>
-                        <span>Changement de Pneus</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-brake text-blue-500 mr-3"></i>
-                        <span>Changement Plaquettes</span>
-                    </li>
-                </ul>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                        <img src="https://www.pexels.com/photo/person-changing-car-oil-4489731/" alt="Vidange" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Vidange</h3>
+                        <p class="text-sm text-gray-600">À partir de 300 DH</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                        <img src="https://www.pexels.com/photo/black-car-on-lift-3806240/" alt="Changement Pneus" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Changement Pneus</h3>
+                        <p class="text-sm text-gray-600">À partir de 500 DH</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                        <img src="/api/placeholder/100/100" alt="Plaquettes" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Changement Plaquettes</h3>
+                        <p class="text-sm text-gray-600">À partir de 400 DH</p>
+                    </div>
+                    <div class="bg-blue-50 rounded-lg p-3 text-center">
+                        <img src="/api/placeholder/100/100" alt="Amortisseurs" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Changement Amortisseurs</h3>
+                        <p class="text-sm text-gray-600">À partir de 800 DH</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Long-Term Services Card -->
@@ -44,20 +52,28 @@
                     <h2 class="text-xl font-semibold text-gray-700">Services Long Terme</h2>
                     <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full text-sm">4 Types</span>
                 </div>
-                <ul class="space-y-2">
-                    <li class="flex items-center">
-                        <i class="fas fa-cogs text-green-500 mr-3"></i>
-                        <span>Kit d'Embrayage</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-bezier-curve text-green-500 mr-3"></i>
-                        <span>Changement Turbo</span>
-                    </li>
-                    <li class="flex items-center">
-                        <i class="fas fa-tools text-green-500 mr-3"></i>
-                        <span>Changement Culasse</span>
-                    </li>
-                </ul>
+                <div class="grid grid-cols-2 gap-4">
+                    <div class="bg-green-50 rounded-lg p-3 text-center">
+                        <img src="/api/placeholder/100/100" alt="Kit Embrayage" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Kit Embrayage</h3>
+                        <p class="text-sm text-gray-600">À partir de 2 500 DH</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-3 text-center">
+                        <img src="/api/placeholder/100/100" alt="Turbo" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Changement Turbo</h3>
+                        <p class="text-sm text-gray-600">À partir de 4 000 DH</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-3 text-center">
+                        <img src="/api/placeholder/100/100" alt="Culasse" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Changement Culasse</h3>
+                        <p class="text-sm text-gray-600">À partir de 3 500 DH</p>
+                    </div>
+                    <div class="bg-green-50 rounded-lg p-3 text-center">
+                        <img src="/api/placeholder/100/100" alt="Chaîne Distribution" class="w-full h-24 object-cover rounded-lg mb-2">
+                        <h3 class="font-medium">Chaîne Distribution</h3>
+                        <p class="text-sm text-gray-600">À partir de 2 800 DH</p>
+                    </div>
+                </div>
             </div>
 
             <!-- Recent Services Card -->
@@ -69,17 +85,23 @@
                 <ul class="space-y-3">
                     <li class="flex justify-between items-center">
                         <div class="flex items-center">
-                            <i class="fas fa-car text-gray-500 mr-3"></i>
-                            <span class="font-medium">Renault Clio</span>
+                            <img src="/api/placeholder/40/40" alt="Service" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <span class="font-medium">Renault Clio</span>
+                                <p class="text-xs text-gray-500">Vidange - 350 DH</p>
+                            </div>
                         </div>
-                        <span class="text-sm text-gray-500">Vidange</span>
+                        <span class="text-sm text-gray-500">25/02/2025</span>
                     </li>
                     <li class="flex justify-between items-center">
                         <div class="flex items-center">
-                            <i class="fas fa-car text-gray-500 mr-3"></i>
-                            <span class="font-medium">Dacia Duster</span>
+                            <img src="/api/placeholder/40/40" alt="Service" class="w-10 h-10 rounded-full mr-3">
+                            <div>
+                                <span class="font-medium">Dacia Duster</span>
+                                <p class="text-xs text-gray-500">Changement Pneus - 600 DH</p>
+                            </div>
                         </div>
-                        <span class="text-sm text-gray-500">Changement Pneus</span>
+                        <span class="text-sm text-gray-500">24/02/2025</span>
                     </li>
                 </ul>
             </div>
@@ -99,6 +121,14 @@
                             <option>Changement Plaquettes de Frein</option>
                             <option>Changement d'Amortisseurs</option>
                         </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Image du Service</label>
+                        <input type="file" accept="image/*" class="w-full border rounded-lg px-3 py-2">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Prix</label>
+                        <input type="number" class="w-full border rounded-lg px-3 py-2" placeholder="Prix en DH">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>
@@ -131,6 +161,14 @@
                             <option>Changement Culasse</option>
                             <option>Changement Chaîne Distribution</option>
                         </select>
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Image du Service</label>
+                        <input type="file" accept="image/*" class="w-full border rounded-lg px-3 py-2">
+                    </div>
+                    <div class="mb-4">
+                        <label class="block text-gray-700 mb-2">Prix</label>
+                        <input type="number" class="w-full border rounded-lg px-3 py-2" placeholder="Prix en DH">
                     </div>
                     <div class="grid grid-cols-2 gap-4">
                         <div>

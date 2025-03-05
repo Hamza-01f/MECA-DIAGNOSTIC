@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use App\Models\User;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class AuthController extends Controller
 {
@@ -14,14 +14,10 @@ class AuthController extends Controller
         return view('login');
     }
 
+
     public function showRegister()
     {
         return view('register');
-    }
-
-    public function showResetPassword()
-    {
-        return view('resetpassword');
     }
 
     public function login(Request $request)
@@ -58,7 +54,6 @@ class AuthController extends Controller
     public function logout()
     {
         Auth::logout();
-        return redirect()->route('login');
+        return view('welcome');
     }
 }
-

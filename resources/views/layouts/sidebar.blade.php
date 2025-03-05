@@ -9,7 +9,7 @@
                 <h3 class="text-center text-gray-500">Youcode Youssoufia</h3>
             </li>
             <li class="bg-blue-100 rounded-lg text-blue-700">
-                <a href="/" class="flex items-center p-3 space-x-3">
+                <a href="dashboard" class="flex items-center p-3 space-x-3">
                     <i class="fas fa-tachometer-alt"></i>
                     <span>Tableau de bord</span>
                 </a>

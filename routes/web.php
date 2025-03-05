@@ -7,11 +7,12 @@ use App\Http\Controllers\VehiculeController;
 use App\Http\Controllers\DiagnosticsController;
 use App\Http\Controllers\FacteurController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\PasswordResetController;
 
 
 
 
-// Route::view('/', 'dashboard');
+Route::view('/', 'welcome');
 
 Route::resource('Clients',ClientController::class);
 Route::resource('Services',ServiceController::class);
@@ -24,7 +25,12 @@ Route::post('/login', [AuthController::class, 'login']);
 
 Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
 Route::post('/register', [AuthController::class, 'register']);
-Route::get('/resetpassword', [AuthController::class, 'showResetPassword'])->name('resetpassword');
+
+// Password Reset Routes
+Route::get('/forgot-password', [PasswordResetController::class, 'showResetPassword'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/resetpassword/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/resetpassword', [PasswordResetController::class, 'updatePassword'])->name('password.update');
 
 Route::get('/dashboard', function () {
     return view('dashboard'); 
