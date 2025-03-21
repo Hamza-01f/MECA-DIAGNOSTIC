@@ -26,7 +26,7 @@
                 <path d="M3 3l18 18" />
                 <path d="M9 15l3 3l4 -3l3 -2" />
             </svg>
-            <span class="text-2xl font-bold text-white">MécaniGest</span>
+            <span class="text-2xl font-bold text-white">MECA_DIAGNOSTICS</span>
         </div>
         <div class="flex items-center space-x-6">
             <a href="{{ route('login') }}" class="text-gray-300 hover:text-white transition-colors duration-300 hover:underline">
@@ -89,7 +89,7 @@
 
     <!-- Footer -->
     <footer class="w-full py-6 border-t border-gray-800 text-center">
-        <p class="text-gray-400">© 2024 MécaniGest - Tous droits réservés</p>
+        <p class="text-gray-400">© 2024 MECA_DIAGNOSTICS - Tous droits réservés</p>
     </footer>
 </body>
 </html>

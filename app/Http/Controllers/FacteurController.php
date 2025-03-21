@@ -12,7 +12,7 @@ class FacteurController extends Controller
      */
     public function index()
     {
-        return view('BackOffice.Facteures.index');
+        return view('BackOffice.Invoices.index');
     }
 
     /**

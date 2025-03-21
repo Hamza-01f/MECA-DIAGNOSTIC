@@ -15,7 +15,7 @@
                 </a>
             </li>
             <li>
-                <a href="Clients" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
+                <a href="/clients" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-users"></i>
                     <span>Clients</span>
                 </a>
@@ -27,7 +27,7 @@
                 </a>
             </li>
             <li>
-                <a href="Services" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
+                <a href="/services" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-tools"></i>
                     <span>Services</span>
                 </a>
@@ -45,14 +45,14 @@
                 </a>
             </li>
 
-            <li>
+            {{-- <li>
                 <a href="#" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-cog"></i>
                     <span>Paramètres</span>
                 </a>
-            </li>
+            </li> --}}
             <li class="pt-8">
-                <a href="#" class="flex items-center p-3 space-x-3 text-red-600 hover:bg-red-50 rounded-lg">
+                <a href="logout" class="flex items-center p-3 space-x-3 text-red-600 hover:bg-red-50 rounded-lg">
                     <i class="fas fa-sign-out-alt"></i>
                     <span>Déconnexion</span>
                 </a>

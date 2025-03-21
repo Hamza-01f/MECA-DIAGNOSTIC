@@ -1,65 +1,67 @@
 <?php
 
+
 namespace App\Http\Controllers;
 
-use App\Models\Clients;
+use App\Models\Client;
 use Illuminate\Http\Request;
 
 class ClientController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+    
     public function index()
     {
-        return view('BackOffice.Clients.index');
+        $clients = Client::all();
+        return view('BackOffice.Clients.display', compact('clients'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+
     public function create()
     {
-        //
+        return view('BackOffice.Clients.create');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'required|string|unique:clients,phone',
+            'email' => 'required|email',
+            'address' => 'nullable|string',
+            'city' => 'nullable|string',
+        ]);
+
+        Client::create($request->all());
+
+        return redirect()->route('clients.index')->with('success', 'Client created successfully.');
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Clients $clients)
+  
+    public function edit(Client $client)
     {
-        //
+        return view('BackOffice.Clients.edit', compact('client'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Clients $clients)
+
+    public function update(Request $request, Client $client)
     {
-        //
+        $request->validate([
+            'name' => 'required|string|max:255',
+            'phone' => 'nullable|string|unique:clients,phone,' . $client->id,
+            'email' => 'nullable|email',
+            'address' => 'nullable|string',
+            'city' => 'nullable|string',
+        ]);
+
+        $client->update($request->all());
+
+        return redirect()->route('clients.index')->with('success', 'Client updated successfully.');
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Clients $clients)
-    {
-        //
-    }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Clients $clients)
+    public function destroy(Client $client)
     {
-        //
+        $client->delete();
+        return redirect()->route('clients.index')->with('success', 'Client deleted successfully.');
     }
 }

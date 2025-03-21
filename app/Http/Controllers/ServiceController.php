@@ -7,59 +7,109 @@ use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
+   
     public function index()
     {
-        return view('BackOffice.Services.create');
+        $services = Service::all();
+        return view('BackOffice.Services.index', compact('services'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
+   
     public function create()
     {
-        //
+        return view('BackOffice.Services.update');
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    
     public function store(Request $request)
     {
-        //
-    }
+      
+        $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image',
+            'vehicle_model' => 'nullable|string|max:255',
+            'mileage' => 'nullable|integer',
+        ]);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Service $service)
-    {
-        //
-    }
+        $service = new Service();
+        $service->name = $request->name;
+        $service->type = $request->type;
+        $service->price = $request->price;
+        $service->vehicle_model = $request->vehicle_model;
+        $service->mileage = $request->mileage;
+        $service->image = $request->image;
+        // dd(vars: $service->image);
+        if ($request->hasFile('image')) {
+            $imagePath = $request->file('image')->store('uploads', 'public');
+           
+            $service->image = $imagePath;
+        }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
+        $service->save();
+
+        if ($request->ajax()) {
+            return response()->json([
+                'success' => true,
+                'service' => $service,
+            ]);
+        }
+
+        return redirect()->route('services.index')->with('success', 'Service created successfully.');
+    
+    }
+ 
     public function edit(Service $service)
     {
-        //
+        return response()->json($service);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
+    
     public function update(Request $request, Service $service)
     {
-        //
+        $request->validate([
+            'name' => 'required',
+            'type' => 'required',
+            'price' => 'required|numeric',
+            'image' => 'nullable|image',
+            'vehicle_model' => 'nullable|string|max:255',
+            'mileage' => 'nullable|integer',
+        ]);
+
+        $service->name = $request->name;
+        $service->type = $request->type;
+        $service->price = $request->price;
+        $service->vehicle_model = $request->vehicle_model;
+        $service->mileage = $request->mileage;
+
+        if ($request->hasFile('image')) {
+            if ($service->image) {
+                \Storage::delete('public/' . $service->image);
+            }
+            $imagePath = $request->file('image')->store('services', 'public');
+            $service->image = $imagePath;
+        }
+
+        $service->save();
+
+        return response()->json([
+            'success' => true,
+            'service' => $service,
+        ]);
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
+  
     public function destroy(Service $service)
     {
-        //
+        if ($service->image) {
+            \Storage::delete('public/' . $service->image);
+        }
+
+        $service->delete();
+
+        return response()->json([
+            'success' => true,
+        ]);
     }
 }

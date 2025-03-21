@@ -13,6 +13,7 @@ RUN a2enmod rewrite
 
 RUN docker-php-ext-install pdo pdo_pgsql
 
+RUN echo "Listen 80" > /etc/apache2/ports.conf
 
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 
