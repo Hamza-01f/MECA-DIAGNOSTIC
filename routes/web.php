@@ -65,6 +65,10 @@ Route::view('/', 'welcome');
     Route::get('/404', function(){
          return view('404');
     })->name('404');
+
+    Route::get('/contact', function(){
+        return "hello";
+    });
 // });
 
 require __DIR__.'/auth.php';
