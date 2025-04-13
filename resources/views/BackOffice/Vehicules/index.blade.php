@@ -35,6 +35,7 @@
                         <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Marque/Modèle</th>
                         <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Kilométrage</th>
                         <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Dernière visite</th>
+                        <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">service type</th>
                         <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                         <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                     </tr>
@@ -58,6 +59,7 @@
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">50,000 km</td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">10/02/2024</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">vidange</td>
                         <td class="px-4 py-4 whitespace-nowrap">
                             <span class="px-2 py-1 text-xs rounded-full bg-green-100 text-green-800">
                                 À jour
@@ -65,9 +67,7 @@
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm">
                             <div class="flex space-x-2">
-                                <a href="#" class="text-blue-500 hover:text-blue-700" title="Voir détails">
-                                    <i class="fas fa-eye"></i>
-                                </a>
+
                                 <a href="#" class="text-yellow-500 hover:text-yellow-700" title="Modifier">
                                     <i class="fas fa-edit"></i>
                                 </a>
@@ -99,6 +99,7 @@
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">75,000 km</td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">15/01/2024</td>
+                        <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-700">vidange</td>
                         <td class="px-4 py-4 whitespace-nowrap">
                             <span class="px-2 py-1 text-xs rounded-full bg-yellow-100 text-yellow-800">
                                 Maintenance requise

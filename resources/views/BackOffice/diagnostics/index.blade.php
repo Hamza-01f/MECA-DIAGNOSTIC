@@ -88,6 +88,7 @@
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                            <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service type</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
                         </tr>
                     </thead>
@@ -113,6 +114,9 @@
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">24/02/2025</td>
                             <td class="px-4 py-3 whitespace-nowrap">
+                                <p> vidange </p>
+                            </td>
+                            <td class="px-4 py-3 whitespace-nowrap">
                                 <div class="flex space-x-2">
                                     <a href="#" class="text-blue-500 hover:text-blue-700"><i class="fas fa-eye"></i></a>
                                     <a href="#" class="text-green-500 hover:text-green-700"><i class="fas fa-edit"></i></a>
@@ -125,13 +129,6 @@
             </div>
         </div>
 
-        <!-- Diagnostic Types Pie Chart -->
-        <div class="bg-white rounded-lg shadow-md p-4">
-            <h3 class="font-semibold text-lg mb-4">Types de Diagnostics</h3>
-            <div class="h-80">
-                <canvas id="diagnosticTypesChart"></canvas>
-            </div>
-        </div>
     </div>
 @endsection
 

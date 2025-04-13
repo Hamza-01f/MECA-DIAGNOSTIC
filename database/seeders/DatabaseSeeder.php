@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder
         ]);
 
 
-        $admin->assignRole('admin');
+
+        $this->call([
+            ServiceSeeder::class,
+        ]);
     }
 }

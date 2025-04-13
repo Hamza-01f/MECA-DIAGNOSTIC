@@ -28,7 +28,6 @@ Route::view('/', 'welcome');
 
     // Route::resource('Services',ServiceController::class);
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
-    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update');
@@ -66,9 +65,6 @@ Route::view('/', 'welcome');
          return view('404');
     })->name('404');
 
-    Route::get('/contact', function(){
-        return "hello";
-    });
 // });
 
 require __DIR__.'/auth.php';
