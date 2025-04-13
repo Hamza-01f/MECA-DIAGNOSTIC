@@ -28,6 +28,7 @@ Route::view('/', 'welcome');
 
     // Route::resource('Services',ServiceController::class);
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
+    Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
     Route::get('/services/{service}/edit', [ServiceController::class, 'edit'])->name('services.edit');
     Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update');
@@ -35,7 +36,16 @@ Route::view('/', 'welcome');
 
     //service ends
 
-    Route::resource('Vehicule',VehiculeController::class);
+    //vehicule starts
+    Route::prefix('vehicules')->group(function () {
+        Route::get('/', [VehiculeController::class, 'index'])->name('vehicules.index');
+        Route::get('/create', [VehiculeController::class, 'create'])->name('vehicules.create');
+        Route::post('/', [VehiculeController::class, 'store'])->name('vehicules.store');
+        Route::get('/{vehicule}/edit', [VehiculeController::class, 'edit'])->name('vehicules.edit');
+        Route::put('/{vehicule}', [VehiculeController::class, 'update'])->name('vehicules.update');
+        Route::delete('/{vehicule}', [VehiculeController::class, 'destroy'])->name('vehicules.destroy');
+    });
+    //vehicules end
     Route::resource('Diagnostics',DiagnosticsController::class);
     Route::resource('Facteur',FacteurController::class);
     

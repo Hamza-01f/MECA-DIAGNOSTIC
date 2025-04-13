@@ -14,7 +14,9 @@ class ServiceController extends Controller
         return view('BackOffice.Services.index', compact('services'));
     }
 
-
+    public function create(){
+        
+    }
 
     public function store(Request $request)
     {

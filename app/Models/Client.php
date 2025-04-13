@@ -11,7 +11,13 @@ class Client extends Model
         'phone',
         'email',
         'address',
-        'city'
+        'city',
+        'role'
     ];
+
+    public function vehicules()
+    {
+        return $this->hasMany(Vehicule::class);
+    }
 
 }

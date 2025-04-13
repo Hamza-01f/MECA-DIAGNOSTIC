@@ -19,29 +19,15 @@
         </div>
     </div>
 
-    <!-- Diagnostics Summary Cards -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-start">
                 <div>
                     <p class="text-gray-500">Total Diagnostics</p>
                     <h3 class="text-3xl font-bold mt-1">86</h3>
-                    <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up"></i> +5.3%</p>
                 </div>
                 <div class="bg-purple-100 p-3 rounded-full">
                     <i class="fas fa-stethoscope text-purple-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Diagnostics Urgents</p>
-                    <h3 class="text-3xl font-bold mt-1">12</h3>
-                    <p class="text-red-500 text-sm mt-2"><i class="fas fa-exclamation-triangle"></i> Attention</p>
-                </div>
-                <div class="bg-red-100 p-3 rounded-full">
-                    <i class="fas fa-clock text-red-500 text-xl"></i>
                 </div>
             </div>
         </div>
@@ -71,7 +57,6 @@
         </div>
     </div>
 
-    <!-- Diagnostics List & Charts -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Diagnostics Table -->
         <div class="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
@@ -85,7 +70,6 @@
                         <tr>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Client</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Véhicule</th>
-                            <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Type</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Statut</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
                             <th class="px-4 py-3 bg-gray-50 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Service type</th>
@@ -107,9 +91,6 @@
                                 <p class="text-xs text-gray-500">96325-C-15</p>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap">
-                                <p class="text-sm text-gray-700">Diagnostic complet</p>
-                            </td>
-                            <td class="px-4 py-3 whitespace-nowrap">
                                 <span class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-800">En attente</span>
                             </td>
                             <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">24/02/2025</td>
@@ -123,7 +104,7 @@
                                 </div>
                             </td>
                         </tr>
-                        <!-- Add more diagnostic rows here -->
+                    
                     </tbody>
                 </table>
             </div>

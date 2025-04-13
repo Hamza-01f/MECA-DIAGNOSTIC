@@ -21,7 +21,7 @@
                 </a>
             </li>
             <li>
-                <a href="Vehicule" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
+                <a href="vehicules" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-car"></i>
                     <span>Véhicules</span>
                 </a>

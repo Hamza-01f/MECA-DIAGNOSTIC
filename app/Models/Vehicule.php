@@ -4,28 +4,33 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Carbon\Carbon;
 
 class Vehicule extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'user_id',
+        'client_id',
         'matricule',
         'model',
+        'marque',
         'kilometrage',
         'last_visit',
         'service_id',
         'service_period',
         'days_until_service',
-        'status',
+        'status'
     ];
 
-    protected $dates = ['last_visit'];
+    protected $casts = [
+        'last_visit' => 'datetime'
+    ];
 
-    public function user()
+
+    public function client()
     {
-        return $this->belongsTo(User::class);
+        return $this->belongsTo(Client::class, 'client_id');
     }
 
     public function service()
@@ -33,10 +38,30 @@ class Vehicule extends Model
         return $this->belongsTo(Service::class);
     }
 
-    public function updateServiceStatus()
+  
+    public function calculateDaysUntilService()
     {
-        $this->days_until_service = $this->service_period - (now()->diffInDays($this->last_visit));
-        $this->status = $this->days_until_service > 0 ? 'À jour' : 'Maintenance requise';
-        $this->save();
+        if ($this->last_visit && $this->service_period) {
+            $nextServiceDate = $this->last_visit->addDays($this->service_period);
+            $this->days_until_service = (int) now()->diffInDays($nextServiceDate, false);
+            
+            if ($this->days_until_service <= 0) {
+                $this->status = 'Maintenance requise';
+            } else {
+                $this->status = 'À jour';
+            }
+            
+            $this->save();
+        }
+    }
+
+    
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::retrieved(function ($vehicule) {
+            $vehicule->calculateDaysUntilService();
+        });
     }
 }
