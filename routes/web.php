@@ -36,8 +36,28 @@ Route::view('/', 'welcome');
 
     //service ends
 
-    Route::resource('Vehicule',VehiculeController::class);
-    Route::resource('Diagnostics',DiagnosticsController::class);
+    //vehicule starts
+    Route::prefix('vehicules')->group(function () {
+        Route::get('/', [VehiculeController::class, 'index'])->name('vehicules.index');
+        Route::get('/create', [VehiculeController::class, 'create'])->name('vehicules.create');
+        Route::post('/', [VehiculeController::class, 'store'])->name('vehicules.store');
+        Route::get('/{vehicule}/edit', [VehiculeController::class, 'edit'])->name('vehicules.edit');
+        Route::put('/{vehicule}', [VehiculeController::class, 'update'])->name('vehicules.update');
+        Route::delete('/{vehicule}', [VehiculeController::class, 'destroy'])->name('vehicules.destroy');
+    });
+    //vehicules end
+    // Route::resource('Diagnostics',DiagnosticsController::class);
+
+    Route::prefix('Diagnostics')->group(function () {
+        Route::get('/', [DiagnosticsController::class, 'index'])->name('Diagnostics.index');
+        Route::get('/create', [DiagnosticsController::class, 'create'])->name('Diagnostics.create');
+        Route::post('/', [DiagnosticsController::class, 'store'])->name('Diagnostics.store');
+        Route::get('/{diagnostic}/edit', [DiagnosticsController::class, 'edit'])->name('Diagnostics.edit');
+        Route::put('/Diagnostics/{diagnostic}', [DiagnosticsController::class, 'update'])->name('Diagnostics.update');
+        Route::delete('/{diagnostic}', [DiagnosticsController::class, 'destroy'])->name('Diagnostics.destroy');
+        Route::get('/generate-pdf/{diagnostic}', [DiagnosticsController::class, 'generatePdf'])->name('diagnostics.generate-pdf');
+    });
+
     Route::resource('Facteur',FacteurController::class);
     
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
@@ -66,9 +86,6 @@ Route::view('/', 'welcome');
          return view('404');
     })->name('404');
 
-    Route::get('/contact', function(){
-        return "hello";
-    });
 // });
 
 require __DIR__.'/auth.php';

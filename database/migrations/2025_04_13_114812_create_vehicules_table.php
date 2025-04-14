@@ -13,14 +13,15 @@ return new class extends Migration
     {
         Schema::create('vehicules', function (Blueprint $table) {
             $table->id();
-            $table->string('owner');
-            $table->string('matricule');
-            $table->string('marque');
+            $table->foreignId('user_id')->constrained()->onDelete('cascade');
+            $table->string('matricule')->unique();
             $table->string('model');
-            $table->decimal('kilometrage',10,8);
-            $table->enum('status',['maintenance requis','à jour'])->default('à jour');
-            $table->integer('user_id');
-            $table->ForeignId('users_id')->references('id')->onDelete('cascade');
+            $table->integer('kilometrage');
+            $table->date('last_visit');
+            $table->foreignId('service_id')->constrained()->onDelete('cascade');
+            $table->integer('service_period'); 
+            $table->integer('days_until_service')->nullable(); 
+            $table->enum('status', ['À jour', 'Maintenance requise'])->default('À jour');
             $table->timestamps();
         });
     }
@@ -30,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('vehicules');
+        //
     }
 };

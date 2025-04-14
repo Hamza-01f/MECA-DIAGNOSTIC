@@ -11,9 +11,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('vehicules', function (Blueprint $table) {
+            $table->dropForeign(['user_id']); // Remove old foreign key
+            $table->renameColumn('user_id', 'client_id'); // Rename column
+            $table->foreign('client_id')->references('id')->on('clients'); // New foreign key
         });
     }
 
@@ -22,6 +23,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        //
     }
 };

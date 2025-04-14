@@ -26,7 +26,7 @@
                             <div>
                                 <p class="text-gray-500">Total Clients</p>
                                 <h3 class="text-3xl font-bold mt-1">128</h3>
-                                <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up"></i> +12.5%</p>
+                               
                             </div>
                             <div class="bg-blue-100 p-3 rounded-full">
                                 <i class="fas fa-users text-blue-500 text-xl"></i>
@@ -38,7 +38,7 @@
                             <div>
                                 <p class="text-gray-500">Services en cours</p>
                                 <h3 class="text-3xl font-bold mt-1">24</h3>
-                                <p class="text-red-500 text-sm mt-2"><i class="fas fa-arrow-down"></i> -3.8%</p>
+                               
                             </div>
                             <div class="bg-yellow-100 p-3 rounded-full">
                                 <i class="fas fa-tools text-yellow-500 text-xl"></i>
@@ -50,7 +50,7 @@
                             <div>
                                 <p class="text-gray-500">Revenu mensuel</p>
                                 <h3 class="text-3xl font-bold mt-1">48 560 DH</h3>
-                                <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up"></i> +18.2%</p>
+                           
                             </div>
                             <div class="bg-green-100 p-3 rounded-full">
                                 <i class="fas fa-money-bill-wave text-green-500 text-xl"></i>
@@ -62,7 +62,7 @@
                             <div>
                                 <p class="text-gray-500">Diagnostics</p>
                                 <h3 class="text-3xl font-bold mt-1">86</h3>
-                                <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up"></i> +5.3%</p>
+                               
                             </div>
                             <div class="bg-purple-100 p-3 rounded-full">
                                 <i class="fas fa-stethoscope text-purple-500 text-xl"></i>
@@ -104,7 +104,7 @@
                     <!-- Recent Services -->
                     <div class="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
                         <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-semibold text-lg">Services Récents</h3>
+                            <h3 class="font-semibold text-lg">Les promiér 4 Services Récents</h3>
                             <a href="#" class="text-blue-500 text-sm">Voir tout</a>
                         </div>
                         <div class="overflow-x-auto">
@@ -208,49 +208,5 @@
                         </div>
                     </div>
 
-                    <!-- Notifications & Reminders -->
-                    <div class="bg-white rounded-lg shadow-md p-4">
-                        <div class="flex justify-between items-center mb-4">
-                            <h3 class="font-semibold text-lg">Notifications</h3>
-                            <a href="#" class="text-blue-500 text-sm">Tout marquer comme lu</a>
-                        </div>
-                        <div class="space-y-4 h-80 overflow-y-auto">
-                            <div class="p-3 bg-red-50 border-l-4 border-red-500 rounded">
-                                <div class="flex justify-between">
-                                    <p class="text-sm font-medium text-red-800">Rappel urgent</p>
-                                    <span class="text-red-500 text-xs">Il y a 2h</span>
-                                </div>
-                                <p class="text-sm text-red-700 mt-1">La Mercedes de M. Tazi a besoin d'une vérification immédiate du système de freinage</p>
-                            </div>
-                            <div class="p-3 bg-yellow-50 border-l-4 border-yellow-500 rounded">
-                                <div class="flex justify-between">
-                                    <p class="text-sm font-medium text-yellow-800">Pièces en attente</p>
-                                    <span class="text-yellow-500 text-xs">Il y a 5h</span>
-                                </div>
-                                <p class="text-sm text-yellow-700 mt-1">Les plaquettes de frein pour la Golf sont en attente de livraison</p>
-                            </div>
-                            <div class="p-3 bg-green-50 border-l-4 border-green-500 rounded">
-                                <div class="flex justify-between">
-                                    <p class="text-sm font-medium text-green-800">Service terminé</p>
-                                    <span class="text-green-500 text-xs">Il y a 8h</span>
-                                </div>
-                                <p class="text-sm text-green-700 mt-1">Vidange terminée pour la Fiat de Mme Benani. Prêt pour livraison.</p>
-                            </div>
-                            <div class="p-3 bg-blue-50 border-l-4 border-blue-500 rounded">
-                                <div class="flex justify-between">
-                                    <p class="text-sm font-medium text-blue-800">Nouveau rendez-vous</p>
-                                    <span class="text-blue-500 text-xs">Il y a 1j</span>
-                                </div>
-                                <p class="text-sm text-blue-700 mt-1">M. Rachid a pris RDV pour le 28/02 à 14h pour un diagnostic complet</p>
-                            </div>
-                            <div class="p-3 bg-purple-50 border-l-4 border-purple-500 rounded">
-                                <div class="flex justify-between">
-                                    <p class="text-sm font-medium text-purple-800">Rappel de maintenance</p>
-                                    <span class="text-purple-500 text-xs">Il y a 1j</span>
-                                </div>
-                                <p class="text-sm text-purple-700 mt-1">Rappeler les clients ayant atteint les 10 000 km depuis leur dernier service</p>
-                            </div>
-                        </div>
-                    </div>
                 </div>
 @endsection

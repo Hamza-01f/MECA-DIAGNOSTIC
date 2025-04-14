@@ -11,9 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('invoices', function (Blueprint $table) {
-            $table->id();
-            $table->timestamps();
+        Schema::table('clients', function (Blueprint $table) {
+            $table->enum('role',['client','admin'])->default('client');
         });
     }
 
@@ -22,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('invoices');
+        Schema::table('clients', function (Blueprint $table) {
+            //
+        });
     }
 };
