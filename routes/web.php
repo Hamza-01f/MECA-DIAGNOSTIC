@@ -55,7 +55,7 @@ Route::view('/', 'welcome');
         Route::get('/{vehicule}/edit', [DiagnosticsController::class, 'edit'])->name('Diagnostics.edit');
         Route::put('/{vehicule}', [DiagnosticsController::class, 'update'])->name('Diagnostics.update');
         Route::delete('/{vehicule}', [DiagnosticsController::class, 'destroy'])->name('Diagnostics.destroy');
-        Route::get('/',[DiagnosticsController::class ,'generatePdf'])->name('Diagnostics.generatePdf');
+        Route::get('/generate-pdf/{diagnostic}', [DiagnosticsController::class, 'generatePdf'])->name('diagnostics.generate-pdf');
     });
 
     Route::resource('Facteur',FacteurController::class);

@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Diagnostic Report</title>
+    <title>Facteur de Diagnostic</title>
     <style>
         body { font-family: Arial, sans-serif; }
         .header { text-align: center; margin-bottom: 20px; }
@@ -16,44 +16,63 @@
         .findings { margin-top: 20px; }
         .signature { margin-top: 50px; }
         .footer { margin-top: 50px; font-size: 12px; text-align: center; color: #666; }
+        .na { color: #999; font-style: italic; }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="title">Rapport de Diagnostic</div>
+        <div class="title">Facteur de Diagnostic</div>
         <div class="subtitle">N° {{ $diagnostic->id }}</div>
     </div>
     
     <table class="info-table">
         <tr>
             <td class="label">Client:</td>
-            <td>{{ $diagnostic->client->name }}</td>
+            <td>{{ $diagnostic->client->name ?? '<span class="na">N/A</span>' }}</td>
             <td class="label">Téléphone:</td>
-            <td>{{ $diagnostic->client->phone }}</td>
+            <td>{{ $diagnostic->client->phone ?? '<span class="na">N/A</span>' }}</td>
         </tr>
         <tr>
             <td class="label">Véhicule:</td>
-            <td>{{ $diagnostic->vehicule->marque }} {{ $diagnostic->vehicule->model }}</td>
+            <td>
+                @if($diagnostic->vehicule)
+                    {{ $diagnostic->vehicule->marque }} {{ $diagnostic->vehicule->model }}
+                @else
+                    <span class="na">N/A</span>
+                @endif
+            </td>
             <td class="label">Matricule:</td>
-            <td>{{ $diagnostic->vehicule->matricule }}</td>
+            <td>{{ $diagnostic->vehicule->matricule ?? '<span class="na">N/A</span>' }}</td>
         </tr>
         <tr>
             <td class="label">Date:</td>
-            <td>{{ $diagnostic->date->format('d/m/Y') }}</td>
+            <td>
+                @if($diagnostic->date)
+                    {{ $diagnostic->date->format('d/m/Y') }}
+                @else
+                    <span class="na">N/A</span>
+                @endif
+            </td>
             <td class="label">Statut:</td>
             <td>{{ ucfirst($diagnostic->status) }}</td>
         </tr>
         <tr>
             <td class="label">Service:</td>
-            <td>{{ $diagnostic->service->name }}</td>
+            <td>{{ $diagnostic->service->name ?? '<span class="na">N/A</span>' }}</td>
             <td class="label">Coût:</td>
-            <td>{{ number_format($diagnostic->service->price, 2) }} DH</td>
+            <td>
+                @if($diagnostic->service)
+                    {{ number_format($diagnostic->service->price, 2) }} DH
+                @else
+                    <span class="na">N/A</span>
+                @endif
+            </td>
         </tr>
     </table>
     
     <div class="footer">
         <p>Merci pour votre confiance</p>
-        <p>© {{ date('Y') }} Votre Garage. Tous droits réservés.</p>
+        <p>© {{ date('Y') }} Meca Diagnostic , Tous droits réservés.</p>
     </div>
 </body>
 </html>

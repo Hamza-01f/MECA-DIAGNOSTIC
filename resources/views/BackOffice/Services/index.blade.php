@@ -26,7 +26,11 @@
                 <div id="service-{{ $service->id }}" class="bg-white rounded-lg shadow-md p-6">
                     <div class="flex justify-between items-center mb-4">
                         <h2 class="text-xl font-semibold text-gray-700">{{ $service->name }}</h2>
-                        <span class="bg-{{ $service->type === 'quick' ? 'blue' : 'green' }}-100 text-{{ $service->type === 'quick' ? 'blue' : 'green' }}-800 px-3 py-1 rounded-full text-sm">{{ ucfirst($service->type) }}</span>
+                        @if($service->type === 'quick')
+                        <span class="bg-green-100 text-800 px-3 py-1 rounded-full text-sm">rapide</span>
+                        @else
+                        <span class="bg-blue-100 text-800 px-3 py-1 rounded-full text-sm">long</span>
+                        @endif
                     </div>
                     <div class="mb-4">
                         @if($service->image)

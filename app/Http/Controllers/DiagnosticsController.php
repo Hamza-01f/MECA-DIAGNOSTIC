@@ -35,14 +35,18 @@ class DiagnosticsController extends Controller
             'status' => 'required|in:en_attente,complete',
         ]);
 
+        
         $diagnostic = Diagnostics::create($validated);
 
-        return $this->generatePdf($diagnostic);
+        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic updated successfully');
+
+
+        // return $this->generatePdf($diagnostic);
     }
 
     public function show(Diagnostics $diagnostic)
     {
-        return view('BackOffice.diagnostics.show', compact('diagnostic'));
+        return view('BackOffice.diagnostics.index', compact('diagnostic'));
     }
 
     public function edit(Diagnostics $diagnostic)
@@ -50,7 +54,7 @@ class DiagnosticsController extends Controller
         $clients = Client::all();
         $vehicules = Vehicule::all();
         $services = Service::all();
-        return view('BackOffice.diagnostics.edit', compact('diagnostic', 'clients', 'vehicules', 'services'));
+        return view('BackOffice.diagnostics.update', compact('diagnostic', 'clients', 'vehicules', 'services'));
     }
 
     public function update(Request $request, Diagnostics $diagnostic)
@@ -71,11 +75,18 @@ class DiagnosticsController extends Controller
     public function destroy(Diagnostics $diagnostic)
     {
         $diagnostic->delete();
-        return redirect()->route('diagnostics.index')->with('success', 'Diagnostic deleted successfully');
+        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic deleted successfully');
     }
 
     public function generatePdf(Diagnostics $diagnostic)
     {
+     
+        $diagnostic->load(['client', 'vehicule', 'service']);
+        
+        if (!$diagnostic->client || !$diagnostic->vehicule || !$diagnostic->service) {
+            abort(404, 'Related records not found for this diagnostic');
+        }
+        
         $pdf = Pdf::loadView('BackOffice.pdf', compact('diagnostic'));
         return $pdf->download('diagnostic-'.$diagnostic->id.'-'.now()->format('Y-m-d').'.pdf');
     }

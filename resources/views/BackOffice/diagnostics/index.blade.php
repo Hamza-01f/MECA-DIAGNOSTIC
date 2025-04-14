@@ -278,11 +278,11 @@
                                         <i class="fas fa-trash"></i>
                                     </button>
                                 </form>
-                                <a href="{{ route('Diagnostics.generatePdf', $diagnostic->id) }}" class="text-green-500 hover:text-green-700" title="PDF">
+                                <a href="{{ route('diagnostics.generate-pdf', $diagnostic->id) }}" class="text-green-500 hover:text-green-700" title="PDF">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
                             </div>
-                        </td>
+                        </td> 
                     </tr>
                     @endforeach
                 </tbody>

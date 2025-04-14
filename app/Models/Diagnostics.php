@@ -22,20 +22,33 @@ class Diagnostics extends Model
         'date' => 'date',
     ];
 
+    protected $with = ['client', 'vehicule', 'service']; 
+
     public function client()
     {
-        return $this->belongsTo(Client::class);
+        return $this->belongsTo(Client::class)->withDefault([
+            'name' => 'Client Inconnu',
+            'phone' => 'N/A'
+        ]);
     }
 
     public function vehicule()
     {
-        return $this->belongsTo(Vehicule::class);
+        return $this->belongsTo(Vehicule::class)->withDefault([
+            'marque' => 'Inconnue',
+            'model' => 'Inconnu',
+            'matricule' => 'N/A'
+        ]);
     }
-
+    
     public function service()
     {
-        return $this->belongsTo(Service::class);
+        return $this->belongsTo(Service::class)->withDefault([
+            'name' => 'Service Inconnu',
+            'price' => 0
+        ]);
     }
+    
 
     public function getStatusAttribute($value)
     {
