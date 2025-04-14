@@ -14,6 +14,7 @@ class DiagnosticsController extends Controller
     public function index()
     {
         $diagnostics = Diagnostics::with(['client', 'vehicule', 'service'])->get();
+     
         return view('BackOffice.diagnostics.index', compact('diagnostics'));
     }
 
@@ -69,7 +70,7 @@ class DiagnosticsController extends Controller
 
         $diagnostic->update($validated);
 
-        return redirect()->route('diagnostics.index')->with('success', 'Diagnostic updated successfully');
+        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic updated successfully');
     }
 
     public function destroy(Diagnostics $diagnostic)

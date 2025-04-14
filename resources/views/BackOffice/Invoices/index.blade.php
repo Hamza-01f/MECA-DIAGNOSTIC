@@ -19,64 +19,13 @@
         </div>
     </div>
 
-    <!-- Factors Summary Cards -->
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mb-6">
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Clients Récurrents</p>
-                    <h3 class="text-3xl font-bold mt-1">42</h3>
-                    <p class="text-green-500 text-sm mt-2"><i class="fas fa-arrow-up"></i> +8.6%</p>
-                </div>
-                <div class="bg-blue-100 p-3 rounded-full">
-                    <i class="fas fa-users text-blue-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Temps Moyen Service</p>
-                    <h3 class="text-3xl font-bold mt-1">3.5h</h3>
-                    <p class="text-yellow-500 text-sm mt-2"><i class="fas fa-clock"></i> Moyenne</p>
-                </div>
-                <div class="bg-yellow-100 p-3 rounded-full">
-                    <i class="fas fa-stopwatch text-yellow-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Services Complexes</p>
-                    <h3 class="text-3xl font-bold mt-1">18</h3>
-                    <p class="text-red-500 text-sm mt-2"><i class="fas fa-exclamation-triangle"></i> Sensibles</p>
-                </div>
-                <div class="bg-red-100 p-3 rounded-full">
-                    <i class="fas fa-cogs text-red-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Satisfaction Clients</p>
-                    <h3 class="text-3xl font-bold mt-1">4.7/5</h3>
-                    <p class="text-green-500 text-sm mt-2"><i class="fas fa-star"></i> Excellent</p>
-                </div>
-                <div class="bg-green-100 p-3 rounded-full">
-                    <i class="fas fa-smile text-green-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <!-- Factors Analysis -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Factors Table -->
         <div class="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="font-semibold text-lg">Analyse des Facteurs de Service</h3>
+                <h3 class="font-semibold text-lg">la liste des Facteurs pour les diagnostics</h3>
                 <button class="text-blue-500 text-sm">Exporter</button>
             </div>
             <div class="overflow-x-auto">

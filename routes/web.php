@@ -52,9 +52,9 @@ Route::view('/', 'welcome');
         Route::get('/', [DiagnosticsController::class, 'index'])->name('Diagnostics.index');
         Route::get('/create', [DiagnosticsController::class, 'create'])->name('Diagnostics.create');
         Route::post('/', [DiagnosticsController::class, 'store'])->name('Diagnostics.store');
-        Route::get('/{vehicule}/edit', [DiagnosticsController::class, 'edit'])->name('Diagnostics.edit');
-        Route::put('/{vehicule}', [DiagnosticsController::class, 'update'])->name('Diagnostics.update');
-        Route::delete('/{vehicule}', [DiagnosticsController::class, 'destroy'])->name('Diagnostics.destroy');
+        Route::get('/{diagnostic}/edit', [DiagnosticsController::class, 'edit'])->name('Diagnostics.edit');
+        Route::put('/Diagnostics/{diagnostic}', [DiagnosticsController::class, 'update'])->name('Diagnostics.update');
+        Route::delete('/{diagnostic}', [DiagnosticsController::class, 'destroy'])->name('Diagnostics.destroy');
         Route::get('/generate-pdf/{diagnostic}', [DiagnosticsController::class, 'generatePdf'])->name('diagnostics.generate-pdf');
     });
 

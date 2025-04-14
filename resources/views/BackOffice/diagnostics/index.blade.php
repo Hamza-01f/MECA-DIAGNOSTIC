@@ -213,18 +213,6 @@
             </div>
         </div>
         
-        {{-- <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Revenus</p>
-                    <h3 class="text-3xl font-bold mt-1">{{ number_format(Diagnostics::sum('total_cost'), 2) }} DH</h3>
-                    <p class="text-blue-500 text-sm mt-2"><i class="fas fa-chart-line"></i> Ce mois</p>
-                </div>
-                <div class="bg-blue-100 p-3 rounded-full">
-                    <i class="fas fa-coins text-blue-500 text-xl"></i>
-                </div>
-            </div>
-        </div> --}}
     </div>
 
     <!-- Diagnostics Table -->
