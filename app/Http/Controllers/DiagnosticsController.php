@@ -41,8 +41,6 @@ class DiagnosticsController extends Controller
 
         return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic updated successfully');
 
-
-        // return $this->generatePdf($diagnostic);
     }
 
     public function show(Diagnostics $diagnostic)
