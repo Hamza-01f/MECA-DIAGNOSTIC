@@ -46,7 +46,18 @@ Route::view('/', 'welcome');
         Route::delete('/{vehicule}', [VehiculeController::class, 'destroy'])->name('vehicules.destroy');
     });
     //vehicules end
-    Route::resource('Diagnostics',DiagnosticsController::class);
+    // Route::resource('Diagnostics',DiagnosticsController::class);
+
+    Route::prefix('Diagnostics')->group(function () {
+        Route::get('/', [DiagnosticsController::class, 'index'])->name('Diagnostics.index');
+        Route::get('/create', [DiagnosticsController::class, 'create'])->name('Diagnostics.create');
+        Route::post('/', [DiagnosticsController::class, 'store'])->name('Diagnostics.store');
+        Route::get('/{vehicule}/edit', [DiagnosticsController::class, 'edit'])->name('Diagnostics.edit');
+        Route::put('/{vehicule}', [DiagnosticsController::class, 'update'])->name('Diagnostics.update');
+        Route::delete('/{vehicule}', [DiagnosticsController::class, 'destroy'])->name('Diagnostics.destroy');
+        Route::get('/',[DiagnosticsController::class ,'generatePdf'])->name('Diagnostics.generatePdf');
+    });
+
     Route::resource('Facteur',FacteurController::class);
     
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

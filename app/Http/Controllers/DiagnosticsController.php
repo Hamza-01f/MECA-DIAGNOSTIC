@@ -3,63 +3,80 @@
 namespace App\Http\Controllers;
 
 use App\Models\Diagnostics;
+use App\Models\Client;
+use App\Models\Vehicule;
+use App\Models\Service;
 use Illuminate\Http\Request;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class DiagnosticsController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        return view('BackOffice.diagnostics.index');
+        $diagnostics = Diagnostics::with(['client', 'vehicule', 'service'])->get();
+        return view('BackOffice.diagnostics.index', compact('diagnostics'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
-        //
+        $clients = Client::all();
+        $vehicules = Vehicule::all();
+        $services = Service::all();
+        return view('BackOffice.diagnostics.create', compact('clients', 'vehicules', 'services'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
     public function store(Request $request)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'vehicule_id' => 'required|exists:vehicules,id',
+            'service_id' => 'required|exists:services,id',
+            'date' => 'required|date',
+            'status' => 'required|in:en_attente,complete',
+        ]);
+
+        $diagnostic = Diagnostics::create($validated);
+
+        return $this->generatePdf($diagnostic);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(Diagnostics $diagnostics)
+    public function show(Diagnostics $diagnostic)
     {
-        //
+        return view('BackOffice.diagnostics.show', compact('diagnostic'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(Diagnostics $diagnostics)
+    public function edit(Diagnostics $diagnostic)
     {
-        //
+        $clients = Client::all();
+        $vehicules = Vehicule::all();
+        $services = Service::all();
+        return view('BackOffice.diagnostics.edit', compact('diagnostic', 'clients', 'vehicules', 'services'));
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, Diagnostics $diagnostics)
+    public function update(Request $request, Diagnostics $diagnostic)
     {
-        //
+        $validated = $request->validate([
+            'client_id' => 'required|exists:clients,id',
+            'vehicule_id' => 'required|exists:vehicules,id',
+            'service_id' => 'required|exists:services,id',
+            'date' => 'required|date',
+            'status' => 'required|in:en_attente,complete',
+        ]);
+
+        $diagnostic->update($validated);
+
+        return redirect()->route('diagnostics.index')->with('success', 'Diagnostic updated successfully');
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Diagnostics $diagnostics)
+    public function destroy(Diagnostics $diagnostic)
     {
-        //
+        $diagnostic->delete();
+        return redirect()->route('diagnostics.index')->with('success', 'Diagnostic deleted successfully');
+    }
+
+    public function generatePdf(Diagnostics $diagnostic)
+    {
+        $pdf = Pdf::loadView('BackOffice.pdf', compact('diagnostic'));
+        return $pdf->download('diagnostic-'.$diagnostic->id.'-'.now()->format('Y-m-d').'.pdf');
     }
 }
