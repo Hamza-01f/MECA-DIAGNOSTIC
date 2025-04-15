@@ -6,7 +6,6 @@
                 <div class="flex items-center justify-center mb-4">
                     <img src="https://via.placeholder.com/80" alt="Logo" class="h-16 w-16 rounded-full">
                 </div>
-                <h3 class="text-center text-gray-500">Youcode Youssoufia</h3>
             </li>
             <li class="bg-blue-100 rounded-lg text-blue-700">
                 <a href="dashboard" class="flex items-center p-3 space-x-3">
@@ -35,15 +34,15 @@
             <li>
                 <a href="Diagnostics" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-stethoscope"></i>
-                    <span>Diagnostics</span>
+                    <span>Diagnostics & Facteurs</span>
                 </a>
             </li>
-            <li>
+            {{-- <li>
                 <a href="Facteur" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
                     <i class="fas fa-file-invoice"></i>
                     <span>Factures</span>
                 </a>
-            </li>
+            </li> --}}
 
             <li class="pt-8">
                 <a href="logout" class="flex items-center p-3 space-x-3 text-red-600 hover:bg-red-50 rounded-lg">

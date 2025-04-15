@@ -11,15 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('diagnostics', function (Blueprint $table) {
-          
+        Schema::create('diagnostics', function (Blueprint $table) {
+            $table->id();
             $table->foreignId('client_id')->constrained()->onDelete('cascade');
             $table->foreignId('vehicule_id')->constrained()->onDelete('cascade');
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->date('date');
-            $table->enum('status', ['en_attente', 'complete','encours'])->default('en_attente');
-
-            
+            $table->enum('status', ['en_attente', 'complete','en_cours'])->default('en_attente');
+            $table->timestamps();
         });
     }
 
@@ -28,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        //
+        Schema::dropIfExists('diagnostics');
     }
 };

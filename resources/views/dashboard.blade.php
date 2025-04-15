@@ -55,17 +55,6 @@
                 </div>
             </div>
         </div>
-        <div class="bg-white rounded-lg shadow-md p-6">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500">Revenu Total</p>
-                    <h3 class="text-3xl font-bold mt-1">{{ number_format($stats['monthly_revenue'], 0, ',', ' ') }} DH</h3>
-                </div>
-                <div class="bg-green-100 p-3 rounded-full">
-                    <i class="fas fa-money-bill-wave text-green-500 text-xl"></i>
-                </div>
-            </div>
-        </div>
     </div>
 
     <!-- Charts & Tables Row -->

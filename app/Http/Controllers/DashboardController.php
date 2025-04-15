@@ -92,7 +92,7 @@ class DashboardController extends Controller
                 });
                 
             $data['revenue'][] = $dailyRevenue;
-            $data['expenses'][] = 0; // Replace with actual expenses if available
+            $data['expenses'][] = 0; 
         }
         
         return $data;
