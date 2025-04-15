@@ -5,18 +5,39 @@
     <div class="flex justify-between items-center mb-6">
         <div class="text-2xl font-bold text-gray-800">Gestion des Véhicules</div>
         <div class="flex items-center space-x-4">
-            <div class="relative">
-                <input type="text" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rechercher un véhicule...">
+            <form method="GET" action="{{ route('vehicules.index') }}" class="relative">
+                <input 
+                    type="text" 
+                    name="search"
+                    value="{{ request('search') }}"
+                    class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
+                    placeholder="Rechercher un véhicule..."
+                >
                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
-            </div>
-            <div>
-                <select class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
-                    <option value="">Tous les Marques</option>
-                    @foreach($vehicules->unique('model') as $vehicule)
-                        <option>{{ $vehicule->marque }}</option>
+                @if(request('search'))
+                    <a href="{{ route('vehicules.index', ['marque' => request('marque')]) }}" 
+                       class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+                        <i class="fas fa-times"></i>
+                    </a>
+                @endif
+            </form>
+            <form method="GET" action="{{ route('vehicules.index') }}">
+                @if(request('search'))
+                    <input type="hidden" name="search" value="{{ request('search') }}">
+                @endif
+                <select 
+                    name="marque" 
+                    class="border rounded-lg px-4 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
+                    onchange="this.form.submit()"
+                >
+                    <option value="">Toutes les Marques</option>
+                    @foreach($marques as $marqueOption)
+                        <option value="{{ $marqueOption }}" {{ request('marque') == $marqueOption ? 'selected' : '' }}>
+                            {{ $marqueOption }}
+                        </option>
                     @endforeach
                 </select>
-            </div>
+            </form>
             <button onclick="openModal()" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
                 <i class="fas fa-plus mr-2"></i> Nouveau Véhicule
             </button>
@@ -86,6 +107,17 @@
 
     <!-- Vehicles List -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+        @if($vehicules->isEmpty())
+            <div class="p-8 text-center text-gray-500">
+                <i class="fas fa-car-alt text-4xl mb-4"></i>
+                <p>Aucun véhicule trouvé</p>
+                @if(request('search') || request('marque'))
+                    <a href="{{ route('vehicules.index') }}" class="text-blue-500 hover:text-blue-700 mt-2 inline-block">
+                        Réinitialiser les filtres
+                    </a>
+                @endif
+            </div>
+        @else
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
@@ -153,6 +185,7 @@
                 </tbody>
             </table>
         </div>
+        @endif
     </div>
 
     <script>
@@ -163,5 +196,17 @@
         function closeModal() {
             document.getElementById('addVehicleModal').classList.add('hidden');
         }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const searchInput = document.querySelector('input[name="search"]');
+            let typingTimer;
+            
+            searchInput.addEventListener('keyup', function() {
+                clearTimeout(typingTimer);
+                typingTimer = setTimeout(() => {
+                    this.form.submit();
+                }, 500);
+            });
+        });
     </script>
 @endsection

@@ -12,9 +12,9 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('vehicules', function (Blueprint $table) {
-            $table->dropForeign(['user_id']); // Remove old foreign key
-            $table->renameColumn('user_id', 'client_id'); // Rename column
-            $table->foreign('client_id')->references('id')->on('clients'); // New foreign key
+            $table->dropForeign(['user_id']); 
+            $table->renameColumn('user_id', 'client_id'); 
+            $table->foreign('client_id')->references('id')->on('clients'); 
         });
     }
 

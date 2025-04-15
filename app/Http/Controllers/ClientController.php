@@ -9,9 +9,19 @@ use Illuminate\Http\Request;
 class ClientController extends Controller
 {
     
-    public function index()
+    public function index(Request $request) 
     {
-        $clients = Client::all();
+        // $clients = Client::all();
+        $search = $request->input('search');
+
+        $clients = Client::when($search, function($query,$search){
+              return $query->where('name','like',"%{$search}%")
+                           ->orWhere('email','like',"%{$search}%")
+                           ->orWhere('phone','like',"%{$search}%")
+                           ->orWhere('address','like',"%{$search}%")
+                           ->orWhere('city','like',"%{$search}%");
+        })->get();
+
         return view('BackOffice.Clients.display', compact('clients'));
     }
 
@@ -24,11 +34,11 @@ class ClientController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'required|string|unique:clients,phone',
-            'email' => 'required|email',
-            'address' => 'nullable|string',
-            'city' => 'nullable|string',
+            // 'name' => 'required|string|max:255',
+            // 'phone' => 'required|string|unique:clients,phone',
+            // 'email' => 'required|email|unique',
+            // 'address' => 'nullable|string',
+            // 'city' => 'nullable|string',
         ]);
 
         Client::create($request->all());
