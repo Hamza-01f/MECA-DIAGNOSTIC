@@ -56,8 +56,8 @@ class DashboardController extends Controller
             ->get();
         
   
-        // $revenueData = $this->getRevenueChartData($startDate, $endDate);
-        // $serviceTypesData = $this->getServiceTypesData($startDate, $endDate);
+        $revenueData = $this->getRevenueChartData($startDate, $endDate);
+        $serviceTypesData = $this->getServiceTypesData($startDate, $endDate);
         
         
         return view('dashboard', compact(
@@ -70,5 +70,48 @@ class DashboardController extends Controller
         ));
     }
     
-
+    private function getRevenueChartData($startDate, $endDate)
+    {
+        $days = $startDate->diffInDays($endDate);
+        $data = [
+            'labels' => [],
+            'revenue' => [],
+            'expenses' => [] 
+        ];
+        
+        for ($i = 0; $i <= $days; $i++) {
+            $date = $startDate->copy()->addDays($i);
+            $data['labels'][] = $date->format('d M');
+            
+            $dailyRevenue = Diagnostics::where('status', 'complete')
+                ->whereDate('date', $date)
+                ->with('service')
+                ->get()
+                ->sum(function($diagnostic) {
+                    return $diagnostic->service->price ?? 0;
+                });
+                
+            $data['revenue'][] = $dailyRevenue;
+            $data['expenses'][] = 0; // Replace with actual expenses if available
+        }
+        
+        return $data;
+    }
+    
+    private function getServiceTypesData($startDate, $endDate)
+    {
+        $serviceTypes = Diagnostics::whereBetween('date', [$startDate, $endDate])
+            ->with('service')
+            ->get()
+            ->groupBy(function($item) {
+                return $item->service->name ?? 'Autre';
+            })
+            ->map->count();
+        
+        return [
+            'labels' => $serviceTypes->keys(),
+            'data' => $serviceTypes->values(),
+            'colors' => ['#3B82F6', '#F59E0B', '#10B981', '#6366F1', '#EC4899']
+        ];
+    }
 }
