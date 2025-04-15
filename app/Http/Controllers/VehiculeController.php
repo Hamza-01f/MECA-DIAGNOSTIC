@@ -11,13 +11,33 @@ use Illuminate\Http\Request;
 class VehiculeController extends Controller
 {
   
-    public function index()
+    public function index(Request $request)
     {
-        $vehicules = Vehicule::with(['client', 'service'])->get(); 
+        $search = $request->input('search');
+        $marque = $request->input('marque');
+ 
+        $vehicules = Vehicule::with(['client', 'service'])
+        ->when($search, function($query,$search){
+               return $query->where('matricule','like',"%{$search}%")
+                            ->orWhere('model','like',"%{$search}%")
+                            ->orWhere('marque','like',"%{$search}%")
+                            ->orWhereHas('client',function($q) use ($search){
+                                $q->where('name','like',"%{$search}%");
+                            });
+            
+        })
+        ->when($marque, function($query, $marque){
+            return $query->where('marque',$marque);
+        })
+        
+        ->get();
+
+
         $clients = Client::all(); 
         $services = Service::all();
-        
-        return view('BackOffice.Vehicules.index', compact('vehicules', 'clients', 'services'));
+        $marques = Vehicule::select('marque')->distinct()->pluck('marque');
+  
+        return view('BackOffice.Vehicules.index', compact('vehicules', 'clients', 'services','marques'));
     }
     
     public function store(Request $request)
