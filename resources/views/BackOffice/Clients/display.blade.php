@@ -6,8 +6,20 @@
         <div class="text-2xl font-bold text-gray-800">Gestion des Clients</div>
         <div class="flex items-center space-x-4">
             <div class="relative">
-                <input type="text" class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" placeholder="Rechercher un client...">
+                <form method="GET" action="{{ route('clients.index')}}" class="relative">
+                  <input
+                  type="text"
+                  name="search"
+                  value="{{ request('search')}}"
+                  class="pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                  placeholder="Rechercher un client ..."
+                  >
                 <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                @if(request('search'))
+                <a href="{{ route('clients.index') }}" class="absolute right-3 top-3 text-gray-400 hover:text-gray-600">
+                    <i class="fas fa-times"></i>
+                @endif
+                </form>
             </div>
             <a href="{{ route('clients.create') }}" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg flex items-center">
                 <i class="fas fa-plus mr-2"></i> Nouveau Client

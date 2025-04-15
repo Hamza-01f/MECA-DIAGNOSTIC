@@ -111,21 +111,13 @@
                             <p class="text-xs text-gray-500">{{ $diagnostic->vehicule->matricule }}</p>
                         </td>
                         <td class="px-4 py-3 whitespace-nowrap">
-                            @php
-                                $statusClasses = [
-                                    'complete' => 'bg-green-100 text-green-800',
-                                    'en_attente' => 'bg-yellow-100 text-yellow-800',
-                                    'en_cours' => 'bg-blue-100 text-blue-800'
-                                ];
-                                $statusText = [
-                                    'complete' => 'Terminé',
-                                    'en_attente' => 'En attente',
-                                    'en_cours' => 'En cours'
-                                ];
-                            @endphp
-                            <span class="px-2 py-1 text-xs rounded-full {{ $statusClasses[$diagnostic->status] ?? 'bg-gray-100 text-gray-800' }}">
-                                {{ $statusText[$diagnostic->status] ?? $diagnostic->status }}
-                            </span>
+                            @if($diagnostic->status === 'complete')  
+                                <p class="bg-green-100 text-green-800">Complete</p> 
+                            @elseif($diagnostic->status === 'en_attente') 
+                                <p class="bg-yellow-100 text-yellow-800">En Attente</p> 
+                            @else  
+                                <p class="bg-blue-100 text-blue-800">En cours</p>
+                            @endif                
                         </td>
                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">{{ $diagnostic->date->format('d/m/Y') }}</td>
                         <td class="px-4 py-3 whitespace-nowrap text-sm text-gray-700">{{ $diagnostic->service->name }}</td>

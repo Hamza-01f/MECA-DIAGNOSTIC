@@ -32,6 +32,7 @@ class DiagnosticsController extends Controller
             'en_cours' => Diagnostics::where('status', 'en_cours')->count(),
         ];
         
+        //  dd($diagnostics);
         return view('BackOffice.diagnostics.index', compact('diagnostics', 'stats'));
     }
 
@@ -50,7 +51,7 @@ class DiagnosticsController extends Controller
             'vehicule_id' => 'required|exists:vehicules,id',
             'service_id' => 'required|exists:services,id',
             'date' => 'required|date',
-            'status' => 'required|in:en_attente,complete',
+            'status' => 'required|in:en_attente,complete,en_cours',
         ]);
 
         
@@ -80,7 +81,7 @@ class DiagnosticsController extends Controller
             'vehicule_id' => 'required|exists:vehicules,id',
             'service_id' => 'required|exists:services,id',
             'date' => 'required|date',
-            'status' => 'required|in:en_attente,complete',
+            'status' => 'required|in:en_attente,complete,en_cours',
         ]);
 
         $diagnostic->update($validated);
