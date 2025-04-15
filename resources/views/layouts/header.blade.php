@@ -62,6 +62,7 @@
         </div>
     </div>
 </body>
+@stack('scripts')
 <script>
         // Revenue Chart
         const revenueCtx = document.getElementById('revenueChart').getContext('2d');

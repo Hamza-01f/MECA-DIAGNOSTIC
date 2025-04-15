@@ -17,7 +17,7 @@ return new class extends Migration
             $table->foreignId('vehicule_id')->constrained()->onDelete('cascade');
             $table->foreignId('service_id')->constrained()->onDelete('cascade');
             $table->date('date');
-            $table->enum('status', ['en_attente', 'complete'])->default('en_attente');
+            $table->enum('status', ['en_attente', 'complete','encours'])->default('en_attente');
 
             
         });
