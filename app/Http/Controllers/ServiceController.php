@@ -8,9 +8,19 @@ use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
-    public function index()
-    {
-        $services = Service::all();
+    public function index(Request $request)
+    {  
+        $search = $request->input('search');
+        $type = $request->input('type');
+        
+        $services = Service::when($search, function ($query, $search) {
+            return $query->where('name', 'like', "%{$search}%");
+        })
+        ->when($type, function ($query, $type) {
+            return $query->where('type', $type);
+        })
+        ->get();
+    
         return view('BackOffice.Services.index', compact('services'));
     }
 

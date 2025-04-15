@@ -107,6 +107,17 @@
 
     <!-- Vehicles List -->
     <div class="bg-white rounded-lg shadow-md overflow-hidden mb-6">
+        @if($vehicules->isEmpty())
+            <div class="p-8 text-center text-gray-500">
+                <i class="fas fa-car-alt text-4xl mb-4"></i>
+                <p>Aucun véhicule trouvé</p>
+                @if(request('search') || request('marque'))
+                    <a href="{{ route('vehicules.index') }}" class="text-blue-500 hover:text-blue-700 mt-2 inline-block">
+                        Réinitialiser les filtres
+                    </a>
+                @endif
+            </div>
+        @else
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
                 <thead>
@@ -174,6 +185,7 @@
                 </tbody>
             </table>
         </div>
+        @endif
     </div>
 
     <script>
