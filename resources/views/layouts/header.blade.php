@@ -40,12 +40,9 @@
                     <i class="fas fa-logout"></i>
                     <span>LogOut</span>
                 </a>
-                <div class="relative">
-                    <i class="fas fa-bell text-xl cursor-pointer"></i>
-                    <span class="absolute notification-badge bg-red-500 text-white text-xs rounded-full h-5 w-5 flex items-center justify-center">8</span>
-                </div>
+
                 <div class="flex items-center space-x-2">
-                    <img src="https://via.placeholder.com/40" alt="Profile" class="h-8 w-8 rounded-full">
+                    
                     <span>Hamza Boumanjel</span>
                     <i class="fas fa-chevron-down text-xs"></i>
                 </div>

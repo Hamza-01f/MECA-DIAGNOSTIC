@@ -13,18 +13,46 @@ class DiagnosticsController extends Controller
 {
     public function index(Request $request)
     {
-       
         $month = $request->input('month');
-        
+        $search = $request->input('search');
+        $status = $request->input('status');
+        $client_id = $request->input('client_id');
+        $vehicule_id = $request->input('vehicule_id');
+        $service_id = $request->input('service_id');
         
         $diagnostics = Diagnostics::with(['client', 'vehicule', 'service'])
             ->when($month, function($query) use ($month) {
                 $query->whereMonth('date', $month);
             })
+            ->when($search, function($query) use ($search) {
+                $query->whereHas('client', function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                })
+                ->orWhereHas('vehicule', function($q) use ($search) {
+                    $q->where('marque', 'like', "%{$search}%")
+                      ->orWhere('model', 'like', "%{$search}%")
+                      ->orWhere('matricule', 'like', "%{$search}%");
+                })
+                ->orWhereHas('service', function($q) use ($search) {
+                    $q->where('name', 'like', "%{$search}%");
+                });
+            })
+            ->when($status, function($query) use ($status) {
+                $query->where('status', $status);
+            })
+            ->when($client_id, function($query) use ($client_id) {
+                $query->where('client_id', $client_id);
+            })
+            ->when($vehicule_id, function($query) use ($vehicule_id) {
+                $query->where('vehicule_id', $vehicule_id);
+            })
+            ->when($service_id, function($query) use ($service_id) {
+                $query->where('service_id', $service_id);
+            })
             ->orderBy('date', 'desc')
             ->get();
         
-       
+        // statistics
         $stats = [
             'total' => Diagnostics::count(),
             'en_attente' => Diagnostics::where('status', 'en_attente')->count(),
@@ -32,8 +60,18 @@ class DiagnosticsController extends Controller
             'en_cours' => Diagnostics::where('status', 'en_cours')->count(),
         ];
         
-        //  dd($diagnostics);
-        return view('BackOffice.diagnostics.index', compact('diagnostics', 'stats'));
+        // filter options
+        $clients = Client::orderBy('name')->get();
+        $vehicules = Vehicule::orderBy('marque')->get();
+        $services = Service::orderBy('name')->get();
+        
+        return view('BackOffice.diagnostics.index', compact(
+            'diagnostics', 
+            'stats',
+            'clients',
+            'vehicules',
+            'services'
+        ));
     }
 
     public function create()
