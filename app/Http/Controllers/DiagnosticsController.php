@@ -11,11 +11,28 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class DiagnosticsController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $diagnostics = Diagnostics::with(['client', 'vehicule', 'service'])->get();
-     
-        return view('BackOffice.diagnostics.index', compact('diagnostics'));
+       
+        $month = $request->input('month');
+        
+        
+        $diagnostics = Diagnostics::with(['client', 'vehicule', 'service'])
+            ->when($month, function($query) use ($month) {
+                $query->whereMonth('date', $month);
+            })
+            ->orderBy('date', 'desc')
+            ->get();
+        
+       
+        $stats = [
+            'total' => Diagnostics::count(),
+            'en_attente' => Diagnostics::where('status', 'en_attente')->count(),
+            'complete' => Diagnostics::where('status', 'complete')->count(),
+            'en_cours' => Diagnostics::where('status', 'en_cours')->count(),
+        ];
+        
+        return view('BackOffice.diagnostics.index', compact('diagnostics', 'stats'));
     }
 
     public function create()
@@ -41,8 +58,6 @@ class DiagnosticsController extends Controller
 
         return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic updated successfully');
 
-
-        // return $this->generatePdf($diagnostic);
     }
 
     public function show(Diagnostics $diagnostic)

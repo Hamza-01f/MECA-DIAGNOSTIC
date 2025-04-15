@@ -8,6 +8,7 @@ use App\Http\Controllers\DiagnosticsController;
 use App\Http\Controllers\FacteurController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
+use App\Http\Controllers\DashboardController;
 
 
 
@@ -71,10 +72,10 @@ Route::view('/', 'welcome');
     Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
     Route::get('/resetpassword/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
     Route::post('/resetpassword', [PasswordResetController::class, 'updatePassword'])->name('password.update');
-    
-    Route::get('/dashboard', function () {
-        return view('dashboard'); 
-    })->middleware('auth')->name('dashboard');
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+    // Route::get('/dashboard', function () {
+    //     return view('dashboard'); 
+    // })->middleware('auth')->name('dashboard');
     
     Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 

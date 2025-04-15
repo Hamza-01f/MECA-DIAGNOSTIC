@@ -64,14 +64,10 @@
                     <select name="status" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
                         <option value="en_attente" {{ $diagnostic->status == 'en_attente' ? 'selected' : '' }}>En Attente</option>
                         <option value="complete" {{ $diagnostic->status == 'complete' ? 'selected' : '' }}>Complété</option>
+                        <option value="en_cours" {{ $diagnostic->status == 'complete' ? 'selected' : '' }}>en cours</option>
                     </select>
                 </div>
                 
-                <!-- Total Cost -->
-                {{-- <div>
-                    <label class="block text-sm font-medium text-gray-700">Coût Total (DH)</label>
-                    <input type="number" step="0.01" name="total_cost" value="{{ $diagnostic->total_cost }}" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
-                </div> --}}
                 
             </div>
             
