@@ -142,6 +142,76 @@
         @endif
 
     </div>
+    <!-- quick service model -->
+    <div id="quick-service-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-6 text-center">Ajouter un Service Rapide</h2>
+            <form id="quickServiceForm" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="type" value="quick">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Nom du Service</label>
+                    <input type="text" name="name" class="w-full border rounded-lg px-3 py-2" placeholder="Nom du Service" required>
+                    <span class="text-red-500 text-sm error-name"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Image du Service</label>
+                    <input type="file" name="image" accept="image/*" class="w-full border rounded-lg px-3 py-2">
+                    <span class="text-red-500 text-sm error-image"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Prix (DH)</label>
+                    <input type="number" name="price" class="w-full border rounded-lg px-3 py-2" placeholder="Prix en DH" required>
+                    <span class="text-red-500 text-sm error-price"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Période (jours)</label>
+                    <input type="number" name="period" class="w-full border rounded-lg px-3 py-2" placeholder="Période en jours" required>
+                    <span class="text-red-500 text-sm error-period"></span>
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" onclick="closeModal('quick-service-modal')">Annuler</button>
+                    <button type="submit" class="bg-blue-600 text-white px-4 py-2 rounded-lg">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Long Service Modal -->
+    <div id="long-service-modal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
+        <div class="bg-white rounded-lg p-8 w-full max-w-md">
+            <h2 class="text-2xl font-bold mb-6 text-center">Ajouter un Service Long Terme</h2>
+            <form id="longServiceForm" method="POST" enctype="multipart/form-data">
+                @csrf
+                <input type="hidden" name="type" value="long">
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Nom du Service</label>
+                    <input type="text" name="name" class="w-full border rounded-lg px-3 py-2" placeholder="Nom du Service" required>
+                    <span class="text-red-500 text-sm error-name"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Image du Service</label>
+                    <input type="file" name="image" accept="image/*" class="w-full border rounded-lg px-3 py-2">
+                    <span class="text-red-500 text-sm error-image"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Prix (DH)</label>
+                    <input type="number" name="price" class="w-full border rounded-lg px-3 py-2" placeholder="Prix en DH" required>
+                    <span class="text-red-500 text-sm error-price"></span>
+                </div>
+                <div class="mb-4">
+                    <label class="block text-gray-700 mb-2">Période (jours)</label>
+                    <input type="number" name="period" class="w-full border rounded-lg px-3 py-2" placeholder="Période en jours" required>
+                    <span class="text-red-500 text-sm error-period"></span>
+                </div>
+                <div class="mt-6 flex justify-between">
+                    <button type="button" class="bg-gray-200 text-gray-700 px-4 py-2 rounded-lg" onclick="closeModal('long-service-modal')">Annuler</button>
+                    <button type="submit" class="bg-green-600 text-white px-4 py-2 rounded-lg">Ajouter</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 
     <script>
        
