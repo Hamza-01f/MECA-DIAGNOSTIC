@@ -29,34 +29,46 @@
         }
     </style>
 </head>
-<body class="bg-gray-100 font-sans">
-    <div class="flex flex-col h-screen">
-        <!-- Header -->
-        <header class="bg-blue-700 text-white h-16 flex items-center justify-between px-6 shadow-md">
-            <div class="flex items-center space-x-4">
-                <span class="text-2xl font-bold">MECA DIAGNOSTIC</span>
-                <span class="bg-blue-600 px-3 py-1 rounded-full text-xs">Admin</span>
-            </div>
-            <div class="flex items-center space-x-4">
-                <a href="logout" class="flex items-center p-3 space-x-3 hover:bg-gray-100 rounded-lg">
-                    <i class="fas fa-logout"></i>
-                    <span>LogOut</span>
-                </a>
 
-                <div class="flex items-center space-x-2">
-                    
-                    <span>Hamza Boumanjel</span>
-                    <i class="fas fa-chevron-down text-xs"></i>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100 font-sans">
+    <div class="flex flex-col h-screen">
+        <!-- Enhanced Header -->
+        <header class="bg-gradient-to-r from-blue-600 via-blue-700 to-indigo-800 text-white h-20 flex items-center justify-between px-6 shadow-lg relative overflow-hidden">
+            <!-- Decorative Elements -->
+            <div class="absolute inset-0 opacity-10">
+                <div class="absolute top-0 left-0 w-20 h-20 rounded-full bg-yellow-300 -translate-x-1/2 -translate-y-1/2"></div>
+                <div class="absolute bottom-0 right-0 w-32 h-32 rounded-full bg-blue-300 translate-x-1/2 translate-y-1/2"></div>
+            </div>
+            
+            <div class="flex items-center space-x-4 z-10">
+                <div class="bg-white text-blue-700 p-2 rounded-lg shadow-md transform rotate-3 hover:rotate-0 transition-transform duration-300">
+                    <span class="text-2xl font-extrabold tracking-wider">MECA DIAGNOSTIC</span>
                 </div>
             </div>
-
+            
+            <div class="flex items-center space-x-6 z-10">
+                <a href="logout" class="flex items-center p-3 space-x-2 bg-white/10 hover:bg-white/20 rounded-lg transition-all duration-300 border border-white/30 hover:scale-105">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                        <path fill-rule="evenodd" d="M3 3a1 1 0 00-1 1v12a1 1 0 001 1h12a1 1 0 001-1V4a1 1 0 00-1-1H3zm10.293 9.293a1 1 0 001.414 1.414l3-3a1 1 0 000-1.414l-3-3a1 1 0 10-1.414 1.414L14.586 9H7a1 1 0 100 2h7.586l-1.293 1.293z" clip-rule="evenodd" />
+                    </svg>
+                    <span>Logout</span>
+                </a>
+                
+                <div class="flex items-center space-x-3 bg-blue-800/40 py-2 px-4 rounded-full border-2 border-blue-300/30">
+                    <div class="h-8 w-8 rounded-full bg-gradient-to-br from-yellow-300 to-orange-500 flex items-center justify-center text-blue-900 font-bold">
+                        HB
+                    </div>
+                    <span class="font-medium">Hamza Boumanjel</span>
+                </div>
+            </div>
         </header>
-
+        
         <!-- Main Layout Wrapper -->
         <div class="flex flex-1 overflow-hidden">
-            @include('layouts.sidebar') 
-            <main class="main-content flex-1 p-6">
-                @yield('content')  
+            @include('layouts.sidebar')
+            
+            <main class="main-content flex-1 p-6 bg-white rounded-tl-3xl mt-2 ml-2 shadow-md">
+                @yield('content')
             </main>
         </div>
     </div>
