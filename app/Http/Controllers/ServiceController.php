@@ -50,14 +50,6 @@ class ServiceController extends Controller
         }
         
         $service->save();
-          
-    
-        // if ($request->ajax()) {
-        //     return response()->json([
-        //         'success' => true,
-        //         'message' => 'Service created successfully.'
-        //     ]);
-        // }
     
         return redirect()->route('services.index')->with('success', 'Service created successfully.');
     }
