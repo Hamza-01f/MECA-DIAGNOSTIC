@@ -22,6 +22,7 @@ class PasswordResetController extends Controller
         $request->validate(['email' => 'required|email|exists:users,email']);
 
         $token = Str::random(60);
+        $resetLink = url('/resetpassword/' . $token);
 
         DB::table('password_resets')->insert([
             'email' => $request->email,
@@ -32,7 +33,6 @@ class PasswordResetController extends Controller
         $mail = new PHPMailer(true);
         
         try {
-            // SMTP configuration from .env
             $mail->isSMTP();
             $mail->Host = env('MAIL_HOST', 'smtp.gmail.com');
             $mail->SMTPAuth = true;
@@ -47,56 +47,10 @@ class PasswordResetController extends Controller
     
             $mail->isHTML(true);
             $mail->Subject = 'Reinitialisation du mot de passe';
-            $mail->Body = '
-            <!DOCTYPE html>
-            <html>
-            <head>
-            <title>Réinitialisation du mot de passe</title>
-            <style>
-                body {
-                    font-family: Arial, sans-serif;
-                    background-color:rgb(245, 199, 199);
-                    padding: 20px;
-                }
-                .container {
-                    max-width: 600px;
-                    background-color:rgb(240, 192, 192);
-                    padding: 20px;
-                    margin: 0 auto;
-                    border-radius: 8px;
-                    box-shadow: 0px 0px 10px 0px #ccc;
-                    text-align: center;
-                }
-                .button {
-                    background-color:rgb(172, 179, 233);
-                    color: white;
-                    padding: 10px 20px;
-                    text-decoration: none;
-                    font-size: 16px;
-                    border-radius: 5px;
-                    display: inline-block;
-                    margin-top: 20px;
-                }
-                .footer {
-                    margin-top: 20px;
-                    font-size: 12px;
-                    color: #777;
-                }
-            </style>
-            </head>
-            <body>
-            <div class="container">
-                <h1>Réinitialisation du mot de passe</h1>
-                <h2>Bonjour,</h2>
-                <h3>Vous avez demandé la réinitialisation de votre mot de passe. Cliquez sur le bouton ci-dessous pour le réinitialiser :</h3>
-                <a href="' . url('/resetpassword/' . $token) . '" class="button">Réinitialiser le mot de passe</a>
-                <h3>Si vous n\'avez pas fait cette demande, ignorez cet e-mail.</h3>
-                <div class="footer">
-                    <h4>&copy; 2025 MECA_DIAGNOSTICS. Tous droits réservés.</h4>
-                </div>
-            </div>
-            </body>
-            </html>';
+            
+            $mail->Body = View::make('password-recover', [
+                'resetLink' => $resetLink
+            ])->render();
                
             $mail->send();
     
