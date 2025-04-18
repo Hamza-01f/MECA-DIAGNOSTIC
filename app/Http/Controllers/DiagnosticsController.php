@@ -52,7 +52,7 @@ class DiagnosticsController extends Controller
             ->orderBy('date', 'desc')
             ->get();
         
-        // statistics
+    
         $stats = [
             'total' => Diagnostics::count(),
             'en_attente' => Diagnostics::where('status', 'en_attente')->count(),
@@ -60,7 +60,7 @@ class DiagnosticsController extends Controller
             'en_cours' => Diagnostics::where('status', 'en_cours')->count(),
         ];
         
-        // filter options
+       
         $clients = Client::orderBy('name')->get();
         $vehicules = Vehicule::orderBy('marque')->get();
         $services = Service::orderBy('name')->get();

@@ -3,7 +3,7 @@
         <ul class="space-y-3">
             <li class="mb-6">
                 <div class="flex items-center justify-center mb-4 animate-pulse">
-                    <img src="" alt="Logo" class="h-16 w-16 rounded-full ring-4 ring-yellow-400 shadow-lg transform hover:scale-110 transition-transform duration-300">
+                    <img src="{{ asset('storage/images/logo.png')  }}" alt="Logo" class="h-16 w-16 rounded-full ring-4 ring-yellow-400 shadow-lg transform hover:scale-110 transition-transform duration-300">
                 </div>
                 <h2 class="text-white text-center font-bold text-lg">Auto Service Pro</h2>
             </li>
