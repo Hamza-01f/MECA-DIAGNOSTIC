@@ -32,4 +32,27 @@
             </div>
         </form>
     </div>
+    @section('scripts')
+    <script>
+        document.getElementById('createClientForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            const form = this;
+            
+            Swal.fire({
+                title: 'Confirmer la création',
+                text: "Voulez-vous créer ce client?",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Oui, créer!',
+                cancelButtonText: 'Annuler'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    form.submit();
+                }
+            });
+        });
+    </script>
+    @endsection
 @endsection

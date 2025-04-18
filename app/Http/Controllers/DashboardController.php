@@ -13,7 +13,7 @@ class DashboardController extends Controller
 {
     public function index(Request $request)
     {
-        // Get search parameters
+       
         $search = $request->input('search');
         $month = $request->input('month', now()->format('F Y'));
         
