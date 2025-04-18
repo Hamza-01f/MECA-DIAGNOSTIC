@@ -11,7 +11,6 @@ class ClientController extends Controller
     
     public function index(Request $request) 
     {
-        // $clients = Client::all();
         $search = $request->input('search');
 
         $clients = Client::when($search, function($query,$search){
