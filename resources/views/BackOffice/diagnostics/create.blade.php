@@ -88,27 +88,11 @@
 </div>
 
 <script>
-    // Dynamic vehicle loading based on client selection
     document.getElementById('client_id').addEventListener('change', function() {
         const clientId = this.value;
         const vehicleSelect = document.getElementById('vehicule_id');
         
-        // Clear existing options
         vehicleSelect.innerHTML = '<option value="">Sélectionner un véhicule</option>';
-        
-        if (clientId) {
-            // Fetch vehicles for the selected client
-            fetch(`/api/clients/${clientId}/vehicles`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(vehicle => {
-                        const option = document.createElement('option');
-                        option.value = vehicle.id;
-                        option.textContent = `${vehicle.marque} ${vehicle.model} - ${vehicle.matricule}`;
-                        vehicleSelect.appendChild(option);
-                    });
-                });
-        }
     });
 </script>
 @endsection

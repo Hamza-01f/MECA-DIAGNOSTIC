@@ -9,6 +9,7 @@ use Illuminate\Support\Str;
 use App\Models\User;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use Illuminate\Support\Facades\View;
 
 class PasswordResetController extends Controller
 {
@@ -52,8 +53,8 @@ class PasswordResetController extends Controller
                 'resetLink' => $resetLink
             ])->render();
                
+            // dd($mail);
             $mail->send();
-    
             return back()->with('success', 'Un lien de réinitialisation a été envoyé à votre email.');
     
         } catch (Exception $e) {

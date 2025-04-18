@@ -92,25 +92,6 @@
         // Clear existing options
         vehicleSelect.innerHTML = '<option value="">Sélectionner un véhicule</option>';
         
-        if (clientId) {
-            // Fetch vehicles for the selected client
-            fetch(`/api/clients/${clientId}/vehicles`)
-                .then(response => response.json())
-                .then(data => {
-                    data.forEach(vehicle => {
-                        const option = document.createElement('option');
-                        option.value = vehicle.id;
-                        option.textContent = `${vehicle.marque} ${vehicle.model} - ${vehicle.matricule}`;
-                        vehicleSelect.appendChild(option);
-                    });
-                    
-                    // Select the vehicle that was previously selected if it belongs to the new client
-                    const originalVehicleId = {{ $diagnostic->vehicule_id }};
-                    if (data.some(v => v.id == originalVehicleId)) {
-                        vehicleSelect.value = originalVehicleId;
-                    }
-                });
-        }
     });
 </script>
 @endsection
