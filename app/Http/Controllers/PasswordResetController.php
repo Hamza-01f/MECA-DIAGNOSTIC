@@ -10,7 +10,6 @@ use App\Models\User;
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-
 class PasswordResetController extends Controller
 {
     public function showResetPassword()
@@ -33,16 +32,17 @@ class PasswordResetController extends Controller
         $mail = new PHPMailer(true);
         
         try {
-           
+            // SMTP configuration from .env
             $mail->isSMTP();
-            $mail->Host = 'smtp.gmail.com'; 
+            $mail->Host = env('MAIL_HOST', 'smtp.gmail.com');
             $mail->SMTPAuth = true;
-            $mail->Username = 'hamza.boumanjel@gmail.com'; 
-            $mail->Password = 'rcgq dikr qxgm oilh'; 
-            $mail->SMTPSecure = 'tls'; 
-            $mail->Port = 587; 
+            $mail->Username = env('MAIL_USERNAME');
+            $mail->Password = env('MAIL_PASSWORD');
+            $mail->SMTPSecure = env('MAIL_ENCRYPTION', 'tls');
+            $mail->Port = env('MAIL_PORT', 587);
     
-            $mail->setFrom('MECA_DIAGNOSTICS@gmail.com', 'MECA_DIAGNOSTICS_Support');
+            $mail->setFrom(env('MAIL_FROM_ADDRESS', 'MECA_DIAGNOSTICS@gmail.com'), 
+                         env('MAIL_FROM_NAME', 'MECA_DIAGNOSTICS_Support'));
             $mail->addAddress($request->email);
     
             $mail->isHTML(true);
@@ -99,14 +99,12 @@ class PasswordResetController extends Controller
             </html>';
                
             $mail->send();
-
     
             return back()->with('success', 'Un lien de réinitialisation a été envoyé à votre email.');
     
         } catch (Exception $e) {
             return back()->withErrors(['email' => "Échec de l'envoi de l'e-mail. Erreur: {$mail->ErrorInfo}"]);
         }
-
     }
 
     public function showResetForm($token)
