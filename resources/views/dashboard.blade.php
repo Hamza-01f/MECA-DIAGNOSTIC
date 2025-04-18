@@ -36,7 +36,7 @@
         <div class="bg-white rounded-lg shadow-md p-6">
             <div class="flex justify-between items-start">
                 <div>
-                    <p class="text-gray-500">Revenu mensuel</p>
+                    <p class="text-gray-500">Revenu </p>
                     <h3 class="text-3xl font-bold mt-1">{{ number_format($stats['monthly_revenue'], 0, ',', ' ') }} DH</h3>
                 </div>
                 <div class="bg-green-100 p-3 rounded-full">
@@ -62,7 +62,7 @@
         <!-- Revenue Chart -->
         <div class="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
             <div class="flex justify-between items-center mb-4">
-                <h3 class="font-semibold text-lg">Revenus et Dépenses</h3>
+                <h3 class="font-semibold text-lg">Revenus </h3>
             </div>
             <div class="h-80">
                 <canvas id="revenueChart" data-revenue="{{ json_encode($revenueData) }}"></canvas>

@@ -60,12 +60,6 @@
                     </svg>
                     <span>Suivi Financier et Facturation Précis</span>
                 </div>
-                <div class="flex items-center space-x-4 bg-gray-800 p-4 rounded-lg hover:bg-gray-700 transition-colors">
-                    <svg xmlns="http://www.w3.org/2000/svg" class="h-10 w-10 text-blue-500" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                    </svg>
-                    <span>Notifications et Alertes Personnalisées</span>
-                </div>
             </div>
             <div class="flex space-x-4">
                 <a href="{{ route('register')}}" class="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 transition-transform transform hover:scale-105">
