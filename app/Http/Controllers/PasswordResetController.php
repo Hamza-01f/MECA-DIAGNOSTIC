@@ -30,7 +30,8 @@ class PasswordResetController extends Controller
             'token' => $token,
             'created_at' => now()
         ]);
-
+        
+        //email starts here 
         $mail = new PHPMailer(true);
         
         try {
