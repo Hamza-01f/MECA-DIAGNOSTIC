@@ -249,5 +249,100 @@
         }
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        let currentDate = new Date();
+        let currentMonth = currentDate.getMonth();
+        let currentYear = currentDate.getFullYear();
+        
+        function updateDateTime() {
+            const now = new Date();
+            const options = { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' };
+            document.getElementById('current-date').textContent = now.toLocaleDateString('fr-FR', options);
+            
+            setInterval(() => {
+                const now = new Date();
+                document.getElementById('current-time').textContent = now.toLocaleTimeString('fr-FR');
+            }, 1000);
+        }
+        
+        function renderCalendar() {
+            const firstDay = new Date(currentYear, currentMonth, 1);
+            const lastDay = new Date(currentYear, currentMonth + 1, 0);
+            const daysInMonth = lastDay.getDate();
+            const startingDay = firstDay.getDay();
+            
+            
+            const adjustedStartingDay = startingDay === 0 ? 6 : startingDay - 1;
+            
+           
+            const monthNames = ["Janvier", "Février", "Mars", "Avril", "Mai", "Juin", 
+                                "Juillet", "Août", "Septembre", "Octobre", "Novembre", "Décembre"];
+            document.getElementById('current-month-year').textContent = 
+                `${monthNames[currentMonth]} ${currentYear}`;
+            
+           
+            const calendarDays = document.getElementById('calendar-days');
+            calendarDays.innerHTML = '';
+            
+            
+            for (let i = 0; i < adjustedStartingDay; i++) {
+                const emptyDay = document.createElement('div');
+                emptyDay.className = 'text-center p-1 text-gray-300';
+                emptyDay.textContent = '';
+                calendarDays.appendChild(emptyDay);
+            }
+            
+           
+            const today = new Date();
+            for (let day = 1; day <= daysInMonth; day++) {
+                const dayElement = document.createElement('div');
+                dayElement.className = 'text-center p-1 rounded-full cursor-pointer hover:bg-gray-100';
+                dayElement.textContent = day;
+                
+                
+                if (day === currentDate.getDate() && 
+                    currentMonth === today.getMonth() && 
+                    currentYear === today.getFullYear()) {
+                    dayElement.className += ' bg-blue-500 text-white hover:bg-blue-600';
+                }
+                
+           
+                const hasEvent = checkIfDateHasEvent(day, currentMonth + 1, currentYear);
+                if (hasEvent) {
+                    dayElement.className += ' font-bold text-blue-600';
+                    const dot = document.createElement('div');
+                    dot.className = 'h-1 w-1 mx-auto mt-1 rounded-full bg-blue-500';
+                    dayElement.appendChild(dot);
+                }
+                
+                calendarDays.appendChild(dayElement);
+            }
+        }
+        
+        function checkIfDateHasEvent(day, month, year) {
+            return Math.random() > 0.8;
+        }
+        
+        document.getElementById('prev-month').addEventListener('click', function() {
+            currentMonth--;
+            if (currentMonth < 0) {
+                currentMonth = 11;
+                currentYear--;
+            }
+            renderCalendar();
+        });
+        
+        document.getElementById('next-month').addEventListener('click', function() {
+            currentMonth++;
+            if (currentMonth > 11) {
+                currentMonth = 0;
+                currentYear++;
+            }
+            renderCalendar();
+        });
+        
+        updateDateTime();
+        renderCalendar();
+    });
 </script>
 @endpush
