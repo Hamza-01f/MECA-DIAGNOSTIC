@@ -78,7 +78,7 @@
         </div>
     </div>
 
-    <!-- Recent Services & Notifications -->
+    <!-- Recent Services & Calendar -->
     <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
         <!-- Recent Services -->
         <div class="bg-white rounded-lg shadow-md p-4 lg:col-span-2">
@@ -151,12 +151,48 @@
                 </table>
             </div>
         </div>
+        
+        <div class="bg-white rounded-lg shadow-md p-4">
+            <div class="flex justify-between items-center mb-4">
+                <h3 class="font-semibold text-lg">Calendrier</h3>
+                <div class="flex items-center space-x-2">
+                    <button id="prev-month" class="p-1 rounded-full hover:bg-gray-100">
+                        <i class="fas fa-chevron-left text-gray-500"></i>
+                    </button>
+                    <button id="next-month" class="p-1 rounded-full hover:bg-gray-100">
+                        <i class="fas fa-chevron-right text-gray-500"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <div class="text-center mb-4">
+                <h2 id="current-month-year" class="text-xl font-bold text-gray-800"></h2>
+            </div>
+            
+            <div class="grid grid-cols-7 gap-1 mb-2">
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Lun</div>
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Mar</div>
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Mer</div>
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Jeu</div>
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Ven</div>
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Sam</div>
+                <div class="text-center text-xs font-medium text-gray-500 p-1">Dim</div>
+            </div>
+            
+            <div id="calendar-days" class="grid grid-cols-7 gap-1"></div>
+            
+            <div class="mt-4 border-t pt-4">
+                <h4 class="font-medium text-gray-700 mb-2">Aujourd'hui</h4>
+                <div id="current-date" class="text-2xl font-bold text-blue-600"></div>
+                <div id="current-time" class="text-lg text-gray-600"></div>
+            </div>
+        </div>
     </div>
 @endsection
 
 @push('scripts')
 <script>
-    
+   
     const revenueCtx = document.getElementById('revenueChart').getContext('2d');
     const revenueData = JSON.parse(document.getElementById('revenueChart').dataset.revenue);
     
@@ -194,7 +230,6 @@
         }
     });
 
-    // Services Pie Chart
     const servicesCtx = document.getElementById('servicesPieChart').getContext('2d');
     const servicesData = JSON.parse(document.getElementById('servicesPieChart').dataset.services);
     
@@ -213,5 +248,6 @@
             maintainAspectRatio: false
         }
     });
+
 </script>
 @endpush
