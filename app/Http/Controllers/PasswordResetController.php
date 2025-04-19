@@ -39,7 +39,7 @@ class PasswordResetController extends Controller
             $mail->Host = 'smtp.gmail.com'; 
             $mail->SMTPAuth = true;
             $mail->Username = 'hamza.boumanjel@gmail.com'; 
-            $mail->Password = 'rcgq dikr qxgm oilh'; 
+            $mail->Password = ''; 
             $mail->SMTPSecure = 'tls'; 
             $mail->Port = 587; 
     
