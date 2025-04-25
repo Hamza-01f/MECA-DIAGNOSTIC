@@ -183,9 +183,14 @@
                 @endforeach
             </div>
         @endif
+        @if($services->hasPages())
+        <div class="mt-6 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+            {{ $services->appends(['search' => request('search'), 'marque' => request('marque')])->links() }}
+        </div>
+        @endif
     </div>
 
-    <!-- Quick Service Modal with Improved Design -->
+    <!-- Quick Service Modal -->
     <div id="quick-service-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50 backdrop-blur-sm">
         <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-2xl transform transition-all animate-fadeIn">
             <div class="flex justify-between items-center mb-6 pb-3 border-b border-gray-200">
@@ -195,45 +200,59 @@
                 </button>
             </div>
             
-            <form id="quickServiceForm" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 <input type="hidden" name="type" value="quick">
                 
                 <div>
                     <label class="block text-gray-700 font-medium mb-2">Nom du Service</label>
-                    <input type="text" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Nom du Service" required>
-                    <span class="text-red-500 text-sm error-name mt-1"></span>
+                    <input type="text" name="name" value="{{ old('name') }}" 
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('name') border-red-500 @enderror" 
+                        placeholder="Nom du Service">
+                    @error('name')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <div>
                     <label class="block text-gray-700 font-medium mb-2">Image du Service</label>
-                    <div class="border border-dashed border-gray-300 rounded-lg px-4 py-4 text-center bg-gray-50">
+                    <div class="border border-dashed border-gray-300 rounded-lg px-4 py-4 text-center bg-gray-50 @error('image') border-red-500 @enderror">
                         <input type="file" name="image" accept="image/*" class="hidden" id="quick-service-image">
                         <label for="quick-service-image" class="cursor-pointer flex flex-col items-center">
                             <i class="fas fa-cloud-upload-alt text-3xl text-blue-500 mb-2"></i>
                             <span class="text-gray-600">Cliquez pour sélectionner une image</span>
                         </label>
                     </div>
-                    <span class="text-red-500 text-sm error-image mt-1"></span>
+                    @error('image')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Prix (DH)</label>
                         <div class="relative">
-                            <input type="number" name="price" class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Prix" required>
+                            <input type="number" name="price" value="{{ old('price') }}" 
+                                class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('price') border-red-500 @enderror" 
+                                placeholder="Prix">
                             <span class="absolute right-3 top-2.5 text-gray-500">DH</span>
                         </div>
-                        <span class="text-red-500 text-sm error-price mt-1"></span>
+                        @error('price')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Période (jours)</label>
                         <div class="relative">
-                            <input type="number" name="period" class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" placeholder="Période" required>
+                            <input type="number" name="period" value="{{ old('period') }}" 
+                                class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('period') border-red-500 @enderror" 
+                                placeholder="Période">
                             <span class="absolute right-3 top-2.5 text-gray-500">jrs</span>
                         </div>
-                        <span class="text-red-500 text-sm error-period mt-1"></span>
+                        @error('period')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -247,7 +266,7 @@
         </div>
     </div>
 
-    <!-- Long Service Modal with Improved Design -->
+    <!-- Long Service Modal -->
     <div id="long-service-modal" class="fixed inset-0 bg-black bg-opacity-60 hidden flex items-center justify-center z-50 backdrop-blur-sm">
         <div class="bg-white rounded-xl p-6 w-full max-w-md shadow-2xl transform transition-all animate-fadeIn">
             <div class="flex justify-between items-center mb-6 pb-3 border-b border-gray-200">
@@ -257,45 +276,59 @@
                 </button>
             </div>
             
-            <form id="longServiceForm" method="POST" enctype="multipart/form-data" class="space-y-4">
+            <form action="{{ route('services.store') }}" method="POST" enctype="multipart/form-data" class="space-y-4">
                 @csrf
                 <input type="hidden" name="type" value="long">
                 
                 <div>
                     <label class="block text-gray-700 font-medium mb-2">Nom du Service</label>
-                    <input type="text" name="name" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Nom du Service" required>
-                    <span class="text-red-500 text-sm error-name mt-1"></span>
+                    <input type="text" name="name" value="{{ old('name') }}" 
+                        class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent @error('name') border-red-500 @enderror" 
+                        placeholder="Nom du Service">
+                    @error('name')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <div>
                     <label class="block text-gray-700 font-medium mb-2">Image du Service</label>
-                    <div class="border border-dashed border-gray-300 rounded-lg px-4 py-4 text-center bg-gray-50">
+                    <div class="border border-dashed border-gray-300 rounded-lg px-4 py-4 text-center bg-gray-50 @error('image') border-red-500 @enderror">
                         <input type="file" name="image" accept="image/*" class="hidden" id="long-service-image">
                         <label for="long-service-image" class="cursor-pointer flex flex-col items-center">
                             <i class="fas fa-cloud-upload-alt text-3xl text-green-500 mb-2"></i>
                             <span class="text-gray-600">Cliquez pour sélectionner une image</span>
                         </label>
                     </div>
-                    <span class="text-red-500 text-sm error-image mt-1"></span>
+                    @error('image')
+                        <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
                 </div>
                 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Prix (DH)</label>
                         <div class="relative">
-                            <input type="number" name="price" class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Prix" required>
+                            <input type="number" name="price" value="{{ old('price') }}" 
+                                class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent @error('price') border-red-500 @enderror" 
+                                placeholder="Prix">
                             <span class="absolute right-3 top-2.5 text-gray-500">DH</span>
                         </div>
-                        <span class="text-red-500 text-sm error-price mt-1"></span>
+                        @error('price')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Période (jours)</label>
                         <div class="relative">
-                            <input type="number" name="period" class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent" placeholder="Période" required>
+                            <input type="number" name="period" value="{{ old('period') }}" 
+                                class="w-full border border-gray-300 rounded-lg pl-4 pr-10 py-2.5 focus:outline-none focus:ring-2 focus:ring-green-500 focus:border-transparent @error('period') border-red-500 @enderror" 
+                                placeholder="Période">
                             <span class="absolute right-3 top-2.5 text-gray-500">jrs</span>
                         </div>
-                        <span class="text-red-500 text-sm error-period mt-1"></span>
+                        @error('period')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 
@@ -344,18 +377,26 @@
     </style>
 
     <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Check if there are validation errors and open the appropriate modal
+        @if($errors->any())
+            @if(old('type') === 'quick')
+                document.getElementById('quick-service-modal').classList.remove('hidden');
+            @elseif(old('type') === 'long')
+                document.getElementById('long-service-modal').classList.remove('hidden');
+            @endif
+        @endif
+
         // Modal functionality
         document.querySelectorAll('[data-modal-target]').forEach(button => {
             button.addEventListener('click', () => {
                 const modalId = button.getAttribute('data-modal-target');
                 const modal = document.getElementById(modalId);
                 modal.classList.remove('hidden');
-                setTimeout(() => {
-                    modal.querySelector('.bg-white').classList.add('animate-fadeIn');
-                }, 10);
             });
         });
 
+        // Close modal when clicking outside
         document.querySelectorAll('.fixed').forEach(modal => {
             modal.addEventListener('click', (e) => {
                 if (e.target === modal) {
@@ -364,50 +405,21 @@
             });
         });
 
+        // Close modal function
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.classList.add('hidden');
-            modal.querySelector('.bg-white').classList.remove('animate-fadeIn');
         }
 
-        // Form submission
-        document.querySelectorAll('form').forEach(form => {
-            form.addEventListener('submit', function(e) {
-                // You can add form validation here if needed
-                const modal = this.closest('.fixed');
-                if (modal) {
-                    modal.classList.add('hidden');
+        // File input display
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const label = this.nextElementSibling;
+                if (this.files.length > 0) {
+                    label.querySelector('span').textContent = this.files[0].name;
                 }
             });
         });
-
-        // Search with debounce
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.querySelector('input[name="search"]');
-            let typingTimer;
-            
-            if (searchInput) {
-                searchInput.addEventListener('keyup', function() {
-                    clearTimeout(typingTimer);
-                    typingTimer = setTimeout(() => {
-                        this.form.submit();
-                    }, 500);
-                });
-                
-                searchInput.addEventListener('keydown', function() {
-                    clearTimeout(typingTimer);
-                });
-            }
-            
-            // File input preview (you can expand this functionality if needed)
-            document.querySelectorAll('input[type="file"]').forEach(input => {
-                input.addEventListener('change', function() {
-                    const label = this.nextElementSibling;
-                    if (this.files.length > 0) {
-                        label.querySelector('span').textContent = this.files[0].name;
-                    }
-                });
-            });
-        });
+    });
     </script>
 @endsection

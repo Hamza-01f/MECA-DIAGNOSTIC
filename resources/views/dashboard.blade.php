@@ -208,15 +208,9 @@
                     backgroundColor: 'rgba(16, 185, 129, 0.1)',
                     tension: 0.3,
                     fill: true
-                },
-                {
-                    label: 'Dépenses',
-                    data: revenueData.expenses,
-                    borderColor: '#EF4444',
-                    backgroundColor: 'rgba(239, 68, 68, 0.1)',
-                    tension: 0.3,
-                    fill: true
                 }
+                
+
             ]
         },
         options: {

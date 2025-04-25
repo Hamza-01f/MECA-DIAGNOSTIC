@@ -7,6 +7,8 @@ use App\Models\Client;
 use App\Models\Vehicule;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreDiagnosticRequest;
+use App\Http\Requests\UpdateDiagnosticRequest;
 use Barryvdh\DomPDF\Facade\Pdf;
 
 class DiagnosticsController extends Controller
@@ -50,7 +52,7 @@ class DiagnosticsController extends Controller
                 $query->where('service_id', $service_id);
             })
             ->orderBy('date', 'desc')
-            ->get();
+            ->paginate(4);
         
     
         $stats = [
@@ -82,25 +84,17 @@ class DiagnosticsController extends Controller
         return view('BackOffice.diagnostics.create', compact('clients', 'vehicules', 'services'));
     }
 
-    public function store(Request $request)
+    public function store(StoreDiagnosticRequest $request)
     {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'vehicule_id' => 'required|exists:vehicules,id',
-            'service_id' => 'required|exists:services,id',
-            'date' => 'required|date',
-            'status' => 'required|in:en_attente,complete,en_cours',
-        ]);
-
+        $validated = $request->validated();
         
         $diagnostic = Diagnostics::create($validated);
 
-        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic updated successfully');
-
+        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic créé avec succès');
     }
 
     public function show(Diagnostics $diagnostic)
-    {
+    {   
         return view('BackOffice.diagnostics.index', compact('diagnostic'));
     }
 
@@ -112,19 +106,13 @@ class DiagnosticsController extends Controller
         return view('BackOffice.diagnostics.update', compact('diagnostic', 'clients', 'vehicules', 'services'));
     }
 
-    public function update(Request $request, Diagnostics $diagnostic)
+    public function update(UpdateDiagnosticRequest $request, Diagnostics $diagnostic)
     {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'vehicule_id' => 'required|exists:vehicules,id',
-            'service_id' => 'required|exists:services,id',
-            'date' => 'required|date',
-            'status' => 'required|in:en_attente,complete,en_cours',
-        ]);
+        $validated = $request->validated();
 
         $diagnostic->update($validated);
 
-        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic updated successfully');
+        return redirect()->route('Diagnostics.index')->with('success', 'Diagnostic mis à jour avec succès');
     }
 
     public function destroy(Diagnostics $diagnostic)

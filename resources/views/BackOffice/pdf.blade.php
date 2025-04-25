@@ -155,11 +155,10 @@
             @endif
         </div>
 
-        <!-- Invoice details table -->
         <table class="info-table">
             <thead>
                 <tr>
-                    <th>Description</th>
+                    <th>Nome du service</th>
                     <th>Date</th>
                     <th>Statut</th>
                     <th>Montant</th>

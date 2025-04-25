@@ -17,6 +17,15 @@
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .input-error {
+            border-color: #ef4444;
+            focus: ring-2 focus: ring-red-500;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -28,7 +37,7 @@
                     Créer un Compte
                 </h1>
             </div>
-            <form class="p-8 space-y-6" action="{{ route('register') }}" method="POST">
+            <form class="p-8 space-y-4" action="{{ route('register') }}" method="POST" id="registerForm">
                 @csrf            
                 <div>
                     <label class="block text-gray-700 mb-2">Nom Complet</label>
@@ -36,12 +45,13 @@
                         <i class="fas fa-user absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
                         <input 
                             type="text" 
-                            name="name"
-                            required
+                            name="name" 
                             class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
                             placeholder="Votre nom et prénom"
+                            value="{{ old('name') }}"
                         >
                     </div>
+                    <div id="name-error" class="error-message"></div>
                 </div>
                 <div>
                     <label class="block text-gray-700 mb-2">Email</label>
@@ -50,11 +60,12 @@
                         <input 
                             type="email" 
                             name="email"
-                            required
                             class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
                             placeholder="Votre email"
+                            value="{{ old('email') }}"
                         >
                     </div>
+                    <div id="email-error" class="error-message"></div>
                 </div>
                 <div>
                     <label class="block text-gray-700 mb-2">Mot de passe</label>
@@ -63,25 +74,12 @@
                         <input 
                             type="password" 
                             name="password"
-                            required
                             class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
                             placeholder="Créez un mot de passe"
                         >
                     </div>
+                    <div id="password-error" class="error-message"></div>
                 </div>
-                {{-- <div>
-                    <label class="block text-gray-700 mb-2">Confirmer Mot de passe</label>
-                    <div class="relative">
-                        <i class="fas fa-lock absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400"></i>
-                        <input 
-                            type="password" 
-                            name="confirm_password"
-                            required
-                            class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-green-500" 
-                            placeholder="Confirmez votre mot de passe"
-                        >
-                    </div>
-                </div> --}}
                 <button 
                     type="submit" 
                     class="w-full bg-green-600 text-white py-3 rounded-lg hover:bg-green-700 transition-colors"
@@ -99,5 +97,35 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('registerForm');
+            
+            const errors = @json($errors->toArray());
+            if (Object.keys(errors).length > 0) {
+                for (const [field, messages] of Object.entries(errors)) {
+                    const errorElement = document.getElementById(`${field}-error`);
+                    if (errorElement) {
+                        errorElement.textContent = messages[0];
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('input-error');
+                        }
+                    }
+                }
+            }
+
+            form.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorElement = document.getElementById(`${this.name}-error`);
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                        this.classList.remove('input-error');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>

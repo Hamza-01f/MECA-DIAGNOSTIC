@@ -59,7 +59,7 @@ Route::view('/', 'welcome');
         Route::get('/generate-pdf/{diagnostic}', [DiagnosticsController::class, 'generatePdf'])->name('diagnostics.generate-pdf');
     });
 
-    Route::resource('Facteur',FacteurController::class);
+    // Route::resource('Facteur',FacteurController::class);
     
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
     Route::post('/login', [AuthController::class, 'login']);

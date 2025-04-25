@@ -54,12 +54,12 @@
                     <span>Logout</span>
                 </a>
                 
-                <div class="flex items-center space-x-3 bg-blue-800/40 py-2 px-4 rounded-full border-2 border-blue-300/30">
+                {{-- <div class="flex items-center space-x-3 bg-blue-800/40 py-2 px-4 rounded-full border-2 border-blue-300/30">
                     <div class="h-8 w-8 rounded-full bg-gradient-to-br from-yellow-300 to-orange-500 flex items-center justify-center text-blue-900 font-bold">
                         HB
                     </div>
                     <span class="font-medium">Hamza Boumanjel</span>
-                </div>
+                </div> --}}
             </div>
         </header>
         
