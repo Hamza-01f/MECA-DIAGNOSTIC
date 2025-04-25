@@ -76,7 +76,6 @@ class DashboardController extends Controller
         $data = [
             'labels' => [],
             'revenue' => [],
-            'expenses' => [] 
         ];
         
         for ($i = 0; $i <= $days; $i++) {

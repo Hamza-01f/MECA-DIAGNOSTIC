@@ -73,6 +73,11 @@
                 </div>
             @endforeach
         </div>
+
+        <!-- Pagination -->
+        <div class="mt-8">
+            {{ $clients->appends(['search' => request('search')])->links('vendor.pagination.tailwind') }}
+        </div>
     @endif
     
 @endsection

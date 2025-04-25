@@ -17,6 +17,15 @@
             background-size: 20px 20px;
             background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
         }
+        .error-message {
+            color: #ef4444;
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        .input-error {
+            border-color: #ef4444;
+            focus: ring-2 focus: ring-red-500;
+        }
     </style>
 </head>
 <body class="bg-gray-100">
@@ -28,7 +37,7 @@
                     Atelier Mécanique
                 </h1>
             </div>
-            <form class="p-8 space-y-6" action="{{ route('login') }}" method="POST">
+            <form class="p-8 space-y-4" action="{{ route('login') }}" method="POST" id="loginForm">
                 @csrf
                 <div>
                     <label class="block text-gray-700 mb-2">Email</label>
@@ -40,8 +49,10 @@
                             required
                             class="w-full pl-10 pr-4 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500" 
                             placeholder="Votre email"
+                            value="{{ old('email') }}"
                         >
                     </div>
+                    <div id="email-error" class="error-message"></div>
                 </div>
                 <div>
                     <label class="block text-gray-700 mb-2">Mot de passe</label>
@@ -55,6 +66,7 @@
                             placeholder="Votre mot de passe"
                         >
                     </div>
+                    <div id="password-error" class="error-message"></div>
                     <a href="{{ route('password.request')}}" class="text-blue-600 text-sm float-right mt-2 hover:underline">
                         Mot de passe oublié?
                     </a>
@@ -76,5 +88,37 @@
             </form>
         </div>
     </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('loginForm');
+            
+            // Display backend validation errors
+            const errors = @json($errors->toArray());
+            if (Object.keys(errors).length > 0) {
+                for (const [field, messages] of Object.entries(errors)) {
+                    const errorElement = document.getElementById(`${field}-error`);
+                    if (errorElement) {
+                        errorElement.textContent = messages[0];
+                        const input = form.querySelector(`[name="${field}"]`);
+                        if (input) {
+                            input.classList.add('input-error');
+                        }
+                    }
+                }
+            }
+
+            // Clear errors on input
+            form.querySelectorAll('input').forEach(input => {
+                input.addEventListener('input', function() {
+                    const errorElement = document.getElementById(`${this.name}-error`);
+                    if (errorElement) {
+                        errorElement.textContent = '';
+                        this.classList.remove('input-error');
+                    }
+                });
+            });
+        });
+    </script>
 </body>
 </html>
