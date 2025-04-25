@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Requests\ClientRequest;
+use App\Http\Requests\UpdateClientRequest;
 
 class ClientController extends Controller
 {
@@ -31,19 +33,13 @@ class ClientController extends Controller
         return view('BackOffice.Clients.create');
     }
 
-    public function store(Request $request)
+    public function store(ClientRequest $request)
     {
-        $request->validate([
-            // 'name' => 'required|string|max:255',
-            // 'phone' => 'required|string|unique:clients,phone',
-            // 'email' => 'required|email|unique',
-            // 'address' => 'nullable|string',
-            // 'city' => 'nullable|string',
-        ]);
+       
 
-        Client::create($request->all());
+        Client::create( $request->validated());
 
-        return redirect()->route('clients.index')->with('success', 'Client updated successfully.');
+        return redirect()->route('clients.index')->with('success', 'Client created successfully.');
     }
 
   
@@ -53,17 +49,10 @@ class ClientController extends Controller
     }
 
 
-    public function update(Request $request, Client $client)
+    public function update(UpdateClientRequest $request, Client $client)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'phone' => 'nullable|string|unique:clients,phone,' . $client->id,
-            'email' => 'nullable|email',
-            'address' => 'nullable|string',
-            'city' => 'nullable|string',
-        ]);
 
-        $client->update($request->all());
+        $client->update($request->validated());
 
         return redirect()->route('clients.index')->with('success', 'Client updated successfully.');
     }

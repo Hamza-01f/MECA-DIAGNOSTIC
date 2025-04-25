@@ -7,6 +7,8 @@ use App\Models\User;
 use App\Models\Service;
 use App\Models\Client;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreVehiculeRequest;
+use App\Http\Requests\UpdateVehiculeRequest;
 
 class VehiculeController extends Controller
 {
@@ -40,24 +42,14 @@ class VehiculeController extends Controller
         return view('BackOffice.Vehicules.index', compact('vehicules', 'clients', 'services','marques'));
     }
     
-    public function store(Request $request)
+    public function store(StoreVehiculeRequest $request)
     {
-        $validated = $request->validate([
-            'client_id' => '',
-            'matricule' => '',
-            'marque' => '',
-            'model' => '',
-            'kilometrage' => '',
-            'last_visit' => '',
-            'service_id' => '',
-        ]);
+        $validated = $request->validated();
         
         $service = Service::find($validated['service_id']);
         $validated['service_period'] = $service->period;
         
         $vehicule = Vehicule::create($validated);
-        
-        
         $vehicule->calculateDaysUntilService();
     
         return redirect()->route('vehicules.index')->with('success', 'Véhicule ajouté avec succès!');
@@ -69,26 +61,18 @@ class VehiculeController extends Controller
         return view('BackOffice.Vehicules.update', compact('vehicule', 'clients', 'services'));
     }
 
-    public function update(Request $request, Vehicule $vehicule)
+    public function update(UpdateVehiculeRequest $request, Vehicule $vehicule)
     {
-        $validated = $request->validate([
-            'client_id' => 'required|exists:clients,id',
-            'matricule' => 'required|max:20|unique:vehicules,matricule,'.$vehicule->id,
-            'marque' => 'required|max:200',
-            'model' => 'required|max:100',
-            'kilometrage' => 'required|integer',
-            'last_visit' => 'required|date',
-            'service_id' => 'required|exists:services,id',
-        ]);
+        $validated = $request->validated();
     
         $service = Service::find($validated['service_id']);
         $validated['service_period'] = $service->period;
     
         $vehicule->update($validated);
-        
         $vehicule->calculateDaysUntilService();
     
-        return redirect()->route('vehicules.index')->with('success', 'Véhicule modifié avec succès!');    }
+        return redirect()->route('vehicules.index')->with('success', 'Véhicule modifié avec succès!');
+    }
 
     public function destroy(Vehicule $vehicule)
     {

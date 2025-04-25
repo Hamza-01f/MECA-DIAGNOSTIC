@@ -208,42 +208,72 @@
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Propriétaire</label>
-                        <select name="client_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <select name="client_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('client_id') border-red-500 @enderror">
                             @foreach($clients as $client)
-                                <option value="{{ $client->id }}">{{ $client->name }}</option>
+                                <option value="{{ $client->id }}" {{ old('client_id') == $client->id ? 'selected' : '' }}>
+                                    {{ $client->name }}
+                                </option>
                             @endforeach
                         </select>
+                        @error('client_id')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Matricule</label>
-                        <input type="text" name="matricule" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <input type="text" name="matricule" value="{{ old('matricule') }}" 
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('matricule') border-red-500 @enderror">
+                        @error('matricule')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Marque</label>
-                        <input type="text" name="marque" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <input type="text" name="marque" value="{{ old('marque') }}" 
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('marque') border-red-500 @enderror">
+                        @error('marque')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Modèle</label>
-                        <input type="text" name="model" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <input type="text" name="model" value="{{ old('model') }}" 
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('model') border-red-500 @enderror">
+                        @error('model')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Kilométrage</label>
                         <div class="relative">
-                            <input type="number" name="kilometrage" class="w-full border border-gray-300 rounded-lg pl-4 pr-16 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                            <input type="number" name="kilometrage" value="{{ old('kilometrage') }}" 
+                                class="w-full border border-gray-300 rounded-lg pl-4 pr-16 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('kilometrage') border-red-500 @enderror">
                             <span class="absolute right-3 top-2.5 text-gray-500">km</span>
                         </div>
+                        @error('kilometrage')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div>
                         <label class="block text-gray-700 font-medium mb-2">Jour du visite</label>
-                        <input type="date" name="last_visit" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent" required>
+                        <input type="date" name="last_visit" value="{{ old('last_visit') }}" 
+                            class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('last_visit') border-red-500 @enderror">
+                        @error('last_visit')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                     <div class="md:col-span-2">
                         <label class="block text-gray-700 font-medium mb-2">Type de service</label>
-                        <select name="service_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent">
+                        <select name="service_id" class="w-full border border-gray-300 rounded-lg px-4 py-2.5 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-transparent @error('service_id') border-red-500 @enderror">
                             @foreach($services as $service)
-                                <option value="{{ $service->id }}">{{ $service->name }}</option>
+                                <option value="{{ $service->id }}" {{ old('service_id') == $service->id ? 'selected' : '' }}>
+                                    {{ $service->name }}
+                                </option>
                             @endforeach
                         </select>
+                        @error('service_id')
+                            <p class="mt-1 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
                     </div>
                 </div>
                 <div class="flex justify-end space-x-3 pt-4 border-t border-gray-200">
@@ -331,6 +361,10 @@
                     clearTimeout(typingTimer);
                 });
             }
-        });
+
+            @if($errors->any())
+            openModal();
+            @endif
+        }); 
     </script>
 @endsection
