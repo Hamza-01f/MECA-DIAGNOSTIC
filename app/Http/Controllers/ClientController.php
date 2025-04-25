@@ -13,20 +13,18 @@ class ClientController extends Controller
     
     public function index(Request $request) 
     {
-      
         $search = $request->input('search');
-
+    
         $clients = Client::when($search, function($query,$search){
               return $query->where('name','like',"%{$search}%")
                            ->orWhere('email','like',"%{$search}%")
                            ->orWhere('phone','like',"%{$search}%")
                            ->orWhere('address','like',"%{$search}%")
                            ->orWhere('city','like',"%{$search}%");
-        })->get();
-
+        })->paginate(12); 
+    
         return view('BackOffice.Clients.display', compact('clients'));
     }
-
 
     public function create()
     {

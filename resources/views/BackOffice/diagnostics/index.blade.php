@@ -406,6 +406,11 @@
             </table>
             @endif
         </div>
+        @if($diagnostics->hasPages())
+        <div class="mt-6 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+            {{ $diagnostics->appends(['search' => request('search'), 'marque' => request('marque')])->links() }}
+        </div>
+        @endif
     </div>
 @endsection
 

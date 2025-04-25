@@ -21,7 +21,7 @@ class ServiceController extends Controller
         ->when($type, function ($query, $type) {
             return $query->where('type', $type);
         })
-        ->get();
+        ->paginate(6);
     
         return view('BackOffice.Services.index', compact('services'));
     }

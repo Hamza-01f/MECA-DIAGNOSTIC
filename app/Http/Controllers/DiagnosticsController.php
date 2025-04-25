@@ -52,7 +52,7 @@ class DiagnosticsController extends Controller
                 $query->where('service_id', $service_id);
             })
             ->orderBy('date', 'desc')
-            ->get();
+            ->paginate(4);
         
     
         $stats = [

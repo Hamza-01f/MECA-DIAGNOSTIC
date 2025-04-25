@@ -32,7 +32,7 @@ class VehiculeController extends Controller
             return $query->where('marque',$marque);
         })
         
-        ->get();
+        ->paginate(6);
 
 
         $clients = Client::all(); 

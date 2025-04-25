@@ -191,6 +191,11 @@
                 </div>
             @endif
         </div>
+        @if($vehicules->hasPages())
+        <div class="mt-6 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+            {{ $vehicules->appends(['search' => request('search'), 'marque' => request('marque')])->links() }}
+        </div>
+        @endif
     </div>
 
     <!-- Add Vehicle Modal with Improved Design -->
@@ -286,9 +291,9 @@
                 </div>
             </form>
         </div>
+            <!-- Add this right before the closing </div> of the main container -->
     </div>
-
-    <!-- Custom animations -->
+ 
     <style>
         @keyframes fadeIn {
             from { opacity: 0; transform: translateY(-10px); }

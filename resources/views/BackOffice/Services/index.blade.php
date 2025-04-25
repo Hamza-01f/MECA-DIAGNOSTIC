@@ -183,6 +183,11 @@
                 @endforeach
             </div>
         @endif
+        @if($services->hasPages())
+        <div class="mt-6 px-4 py-3 flex items-center justify-between border-t border-gray-200 sm:px-6">
+            {{ $services->appends(['search' => request('search'), 'marque' => request('marque')])->links() }}
+        </div>
+        @endif
     </div>
 
     <!-- Quick Service Modal -->
