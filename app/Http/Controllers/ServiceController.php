@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreServiceRequest;
+use App\Http\Requests\UpdateServiceRequest;
 use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
@@ -28,21 +30,15 @@ class ServiceController extends Controller
         
     }
 
-    public function store(Request $request)
+    public function store(StoreServiceRequest $request)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|in:quick,long',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'period' => 'nullable',
-        ]);
+        $validated = $request->validated();
         
         $service = new Service();
-        $service->name = $request->name;
-        $service->type = $request->type;
-        $service->price = $request->price;
-        $service->period = $request->period;
+        $service->name = $validated['name'];
+        $service->type = $validated['type'];
+        $service->price = $validated['price'];
+        $service->period = $validated['period'];
         
         if ($request->hasFile('image')) {
             $imagePath = $request->file('image')->store('services', 'public');
@@ -51,7 +47,7 @@ class ServiceController extends Controller
         
         $service->save();
     
-        return redirect()->route('services.index')->with('success', 'Service created successfully.');
+        return redirect()->route('services.index')->with('success', 'Service créé avec succès.');
     }
 
     public function edit(Service $service)
@@ -59,24 +55,16 @@ class ServiceController extends Controller
         return view('BackOffice.Services.update', compact('service'));
     }
 
-    public function update(Request $request, Service $service)
+    public function update(UpdateServiceRequest $request, Service $service)
     {
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'type' => 'required|in:quick,long',
-            'price' => 'required|numeric|min:0',
-            'image' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
-            'period' => 'nullable',
-            
-        ]);
+        $validated = $request->validated();
 
-        $service->name = $request->name;
-        $service->type = $request->type;
-        $service->price = $request->price;
-        $service->period = $request->period;
+        $service->name = $validated['name'];
+        $service->type = $validated['type'];
+        $service->price = $validated['price'];
+        $service->period = $validated['period'];
 
         if ($request->hasFile('image')) {
-       
             if ($service->image) {
                 Storage::disk('public')->delete($service->image);
             }
@@ -87,7 +75,7 @@ class ServiceController extends Controller
 
         $service->save();
 
-        return redirect()->route('services.index')->with('success', 'Service updated successfully.');
+        return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès.');
     }
 
     public function destroy(Service $service)
