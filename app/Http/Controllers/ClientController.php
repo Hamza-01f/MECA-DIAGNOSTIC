@@ -7,22 +7,21 @@ use App\Models\Client;
 use Illuminate\Http\Request;
 use App\Http\Requests\ClientRequest;
 use App\Http\Requests\UpdateClientRequest;
+use App\Repositories\Interfaces\ClientRepositoryInterface;
 
 class ClientController extends Controller
 {
-    
+    protected $clientRepository;
+
+    public function __construct(ClientRepositoryInterface $clientRepository)
+    {
+        $this->clientRepository = $clientRepository;
+    }
+
     public function index(Request $request) 
     {
         $search = $request->input('search');
-    
-        $clients = Client::when($search, function($query,$search){
-              return $query->where('name','like',"%{$search}%")
-                           ->orWhere('email','like',"%{$search}%")
-                           ->orWhere('phone','like',"%{$search}%")
-                           ->orWhere('address','like',"%{$search}%")
-                           ->orWhere('city','like',"%{$search}%");
-        })->paginate(12); 
-    
+        $clients = $this->clientRepository->all($search);
         return view('BackOffice.Clients.display', compact('clients'));
     }
 
@@ -33,32 +32,24 @@ class ClientController extends Controller
 
     public function store(ClientRequest $request)
     {
-       
-
-        Client::create( $request->validated());
-
+        $this->clientRepository->create($request->validated());
         return redirect()->route('clients.index')->with('success', 'Client created successfully.');
     }
 
-  
     public function edit(Client $client)
     {
         return view('BackOffice.Clients.edit', compact('client'));
     }
 
-
     public function update(UpdateClientRequest $request, Client $client)
     {
-
-        $client->update($request->validated());
-
+        $this->clientRepository->update($client, $request->validated());
         return redirect()->route('clients.index')->with('success', 'Client updated successfully.');
     }
 
-
     public function destroy(Client $client)
     {
-        $client->delete();
+        $this->clientRepository->delete($client);
         return redirect()->route('clients.index')->with('success', 'Client deleted successfully.');
     }
 }

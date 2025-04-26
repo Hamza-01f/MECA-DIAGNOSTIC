@@ -100,7 +100,7 @@ class PasswordResetController extends Controller
             </html>';
                
             $mail->send();
-
+          
     
             return back()->with('success', 'Un lien de réinitialisation a été envoyé à votre email.');
     

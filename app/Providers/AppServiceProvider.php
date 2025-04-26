@@ -6,18 +6,31 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use App\Repositories\Interfaces\AuthRepositoryInterface;
 use App\Repositories\AuthRepository;
-use App\Repositories\AuthRepositoryInterface;
-use App\Repositories\PasswordResetRepository;
-use App\Repositories\PasswordResetRepositoryInterface;
+use App\Repositories\Interfaces\ClientRepositoryInterface;
+use App\Repositories\ClientRepository;
 
 class AppServiceProvider extends ServiceProvider
 {
-    public function register()
-    {
-        // Bind interfaces to their implementations
-        $this->app->bind(AuthRepositoryInterface::class, AuthRepository::class);
-        $this->app->bind(PasswordResetRepositoryInterface::class, PasswordResetRepository::class);
+
+    public function register(){
+
+        $this->app->bind(
+                         AuthRepositoryInterface::class,
+                         AuthRepository::class
+                        );
+
+        $this->app->bind(
+                            ClientRepositoryInterface::class,
+                            ClientRepository::class
+                        );
+    }
+
+
+
+    public function boot(){
+
     }
 }
 
