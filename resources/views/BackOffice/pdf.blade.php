@@ -129,7 +129,6 @@
                 <div class="invoice-title">FACTURE</div>
                 <div class="invoice-number">N° DIAG-{{ str_pad($diagnostic->id, 5, '0', STR_PAD_LEFT) }}</div>
                 <div class="date">Date: {{ now()->format('d/m/Y') }}</div>
-                {{-- <div class="date">Échéance: {{ now()->addDays(30)->format('d/m/Y') }}</div> --}}
             </div>
         </div>
 

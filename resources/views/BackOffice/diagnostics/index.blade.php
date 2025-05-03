@@ -234,7 +234,7 @@
         </div>
         
         <!-- En Attente Card -->
-        <div class="card-stats bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500">
+        {{-- <div class="card-stats bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500">
             <div class="flex justify-between items-start">
                 <div>
                     <p class="text-gray-500 font-medium">En Attente</p>
@@ -253,7 +253,7 @@
                     <div class="h-1 bg-yellow-500 rounded-full" style="width: {{ $stats['total'] > 0 ? ($stats['en_attente'] / $stats['total'] * 100) : 0 }}%"></div>
                 </div>
             </div>
-        </div>
+        </div> --}}
         
         <!-- Complétés Card -->
         <div class="card-stats bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
