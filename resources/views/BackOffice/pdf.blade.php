@@ -129,7 +129,6 @@
                 <div class="invoice-title">FACTURE</div>
                 <div class="invoice-number">N° DIAG-{{ str_pad($diagnostic->id, 5, '0', STR_PAD_LEFT) }}</div>
                 <div class="date">Date: {{ now()->format('d/m/Y') }}</div>
-                {{-- <div class="date">Échéance: {{ now()->addDays(30)->format('d/m/Y') }}</div> --}}
             </div>
         </div>
 
@@ -173,6 +172,7 @@
                         @endif
                     </td>
                     <td>{{ $diagnostic->date ? $diagnostic->date->format('d/m/Y') : 'N/A' }}</td>
+                    <!-- first letter will be capital -->
                     <td>{{ ucfirst($diagnostic->status) }}</td>
                     <td>
                         @if($diagnostic->service)
@@ -187,6 +187,7 @@
                     <td colspan="3" style="text-align: right;"><strong>Sous-total:</strong></td>
                     <td>
                         @if($diagnostic->service)
+                           <!-- format the price to be like 99.00-->
                             {{ number_format($diagnostic->service->price, 2) }} DH
                         @else
                             <span class="na">N/A</span>
@@ -218,7 +219,7 @@
 
 
         <div class="footer">
-            <p>Merci pour votre confiance</p>
+            <p>Merci Pour Votre Confiance</p>
             <p>© {{ date('Y') }} MECA DIAGNOSTIC  , Tous droits réservés.</p>
         </div>
     </div>

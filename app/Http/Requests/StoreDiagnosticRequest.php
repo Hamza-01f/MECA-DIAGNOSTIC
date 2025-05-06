@@ -25,7 +25,7 @@ class StoreDiagnosticRequest extends FormRequest
             'client_id' => 'required|exists:clients,id',
             'vehicule_id' => 'required|exists:vehicules,id',
             'service_id' => 'required|exists:services,id',
-            'date' => 'required|date',
+            'date' => 'required|date|before_or_equal:today',
             'status' => 'required|in:en_attente,complete,en_cours',
         ];
     }
@@ -40,6 +40,7 @@ class StoreDiagnosticRequest extends FormRequest
             'service_id.exists' => 'Le service sélectionné est invalide.',
             'date.required' => 'Le champ date est obligatoire.',
             'date.date' => 'La date doit être une date valide.',
+            'date.before_or_equal' => 'La date de dernière visite ne peut pas être dans le futur.',
             'status.required' => 'Le champ statut est obligatoire.',
             'status.in' => 'Le statut sélectionné est invalide.',
         ];

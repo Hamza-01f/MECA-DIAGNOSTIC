@@ -19,6 +19,7 @@ class VehiculeController extends Controller
         $marque = $request->input('marque');
  
         $vehicules = Vehicule::with(['client', 'service'])
+        //filtering by search keyword
         ->when($search, function($query,$search){
                return $query->where('matricule','like',"%{$search}%")
                             ->orWhere('model','like',"%{$search}%")
@@ -37,6 +38,7 @@ class VehiculeController extends Controller
 
         $clients = Client::all(); 
         $services = Service::all();
+        //Destinct cars to filter them
         $marques = Vehicule::select('marque')->distinct()->pluck('marque');
   
         return view('BackOffice.Vehicules.index', compact('vehicules', 'clients', 'services','marques'));

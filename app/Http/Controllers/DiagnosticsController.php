@@ -23,6 +23,7 @@ class DiagnosticsController extends Controller
         $service_id = $request->input('service_id');
         
         $diagnostics = Diagnostics::with(['client', 'vehicule', 'service'])
+            //apply filter using when
             ->when($month, function($query) use ($month) {
                 $query->whereMonth('date', $month);
             })
@@ -57,7 +58,6 @@ class DiagnosticsController extends Controller
     
         $stats = [
             'total' => Diagnostics::count(),
-            'en_attente' => Diagnostics::where('status', 'en_attente')->count(),
             'complete' => Diagnostics::where('status', 'complete')->count(),
             'en_cours' => Diagnostics::where('status', 'en_cours')->count(),
         ];
@@ -130,7 +130,9 @@ class DiagnosticsController extends Controller
             abort(404, 'Related records not found for this diagnostic');
         }
         
+        //using pdf package
         $pdf = Pdf::loadView('BackOffice.pdf', compact('diagnostic'));
+        //adding date to pdf name
         return $pdf->download('diagnostic-'.$diagnostic->id.'-'.now()->format('Y-m-d').'.pdf');
     }
 }

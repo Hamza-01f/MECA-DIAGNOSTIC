@@ -27,7 +27,7 @@
                     </form>
                     
                     <!-- Type Filter with Improved Styling -->
-                    <form method="GET" action="{{ route('services.index') }}" class="w-full md:w-auto">
+                    <form method="GET" action="{{ route('services.index') }}" class="w-full md:w-auto"> 
                         @if(request('search'))
                             <input type="hidden" name="search" value="{{ request('search') }}">
                         @endif
@@ -378,7 +378,7 @@
 
     <script>
       document.addEventListener('DOMContentLoaded', function() {
-        // Check if there are validation errors and open the appropriate modal
+     
         @if($errors->any())
             @if(old('type') === 'quick')
                 document.getElementById('quick-service-modal').classList.remove('hidden');
@@ -387,8 +387,9 @@
             @endif
         @endif
 
-        // Modal functionality
+        
         document.querySelectorAll('[data-modal-target]').forEach(button => {
+            //add click listener for each
             button.addEventListener('click', () => {
                 const modalId = button.getAttribute('data-modal-target');
                 const modal = document.getElementById(modalId);
@@ -399,19 +400,20 @@
         // Close modal when clicking outside
         document.querySelectorAll('.fixed').forEach(modal => {
             modal.addEventListener('click', (e) => {
+                //ensuring it is not the inner click
                 if (e.target === modal) {
                     closeModal(modal.id);
                 }
             });
         });
 
-        // Close modal function
+        
         function closeModal(modalId) {
             const modal = document.getElementById(modalId);
             modal.classList.add('hidden');
         }
 
-        // File input display
+        //handling the files uploading to see what user choosed
         document.querySelectorAll('input[type="file"]').forEach(input => {
             input.addEventListener('change', function() {
                 const label = this.nextElementSibling;

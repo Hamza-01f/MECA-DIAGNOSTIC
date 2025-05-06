@@ -47,13 +47,13 @@
                             <a href="{{ route('clients.edit', $client->id) }}" class="text-white hover:text-blue-200 transition-colors duration-200">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <form action="{{ route('clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce client?');">
+                            {{-- <form action="{{ route('clients.destroy', $client->id) }}" method="POST" onsubmit="return confirm('Êtes-vous sûr de vouloir supprimer ce client?');">
                                 @csrf
                                 @method('DELETE')
                                 <button type="submit" class="text-white hover:text-blue-200 transition-colors duration-200">
                                     <i class="fas fa-trash"></i>
                                 </button>
-                            </form>
+                            </form> --}}
                         </div>
                     </div>
                     <div class="p-4">

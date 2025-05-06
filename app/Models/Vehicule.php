@@ -56,6 +56,8 @@ class Vehicule extends Model
     }
 
     
+    //static special eloquent method
+    //allowing to run code authonatically 
     protected static function boot()
     {
         parent::boot();

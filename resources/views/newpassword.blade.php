@@ -88,7 +88,7 @@
     </div>
 
     <script>
-        // Password validation script
+        
         document.querySelector('form').addEventListener('submit', function(e) {
             const password = document.querySelector('input[name="password"]');
             const confirmPassword = document.querySelector('input[name="password_confirmation"]');

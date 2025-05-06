@@ -10,14 +10,31 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\PasswordResetController;
 use App\Http\Controllers\DashboardController;
 
-
-
-
 Route::view('/', 'welcome');
 
-// Route::middleware(['auth','admin'])->group(function(){
+// Public routes 
+Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
+Route::post('/login', [AuthController::class, 'login']);
+Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
+Route::post('/register', [AuthController::class, 'register']);
+Route::get('/forgot-password', [PasswordResetController::class, 'showResetPassword'])->name('password.request');
+Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
+Route::get('/resetpassword/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
+Route::post('/resetpassword', [PasswordResetController::class, 'updatePassword'])->name('password.update');
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
 
-    // Route::resource('Clients',ClientController::class);
+// Error pages
+Route::get('/forbidden', function(){
+    return view('forbidden');
+})->name('forbidden');
+
+Route::get('/404', function(){
+    return view('404');
+})->name('404');
+
+// Protected routes 
+Route::middleware(['auth'])->group(function() {
+    // Clients
     Route::get('/clients', [ClientController::class, 'index'])->name('clients.index');
     Route::get('/clients/create', [ClientController::class, 'create'])->name('clients.create');
     Route::post('/clients', [ClientController::class, 'store'])->name('clients.store');
@@ -25,9 +42,7 @@ Route::view('/', 'welcome');
     Route::put('/clients/{client}', [ClientController::class, 'update'])->name('clients.update');
     Route::delete('/clients/{client}', [ClientController::class, 'destroy'])->name('clients.destroy');
 
-    //service begins
-
-    // Route::resource('Services',ServiceController::class);
+    // Services
     Route::get('/services', [ServiceController::class, 'index'])->name('services.index');
     Route::get('/services/create', [ServiceController::class, 'create'])->name('services.create');
     Route::post('/services', [ServiceController::class, 'store'])->name('services.store');
@@ -35,9 +50,7 @@ Route::view('/', 'welcome');
     Route::put('/services/{service}', [ServiceController::class, 'update'])->name('services.update');
     Route::delete('/services/{service}', [ServiceController::class, 'destroy'])->name('services.destroy');
 
-    //service ends
-
-    //vehicule starts
+    // Vehicules
     Route::prefix('vehicules')->group(function () {
         Route::get('/', [VehiculeController::class, 'index'])->name('vehicules.index');
         Route::get('/create', [VehiculeController::class, 'create'])->name('vehicules.create');
@@ -46,9 +59,8 @@ Route::view('/', 'welcome');
         Route::put('/{vehicule}', [VehiculeController::class, 'update'])->name('vehicules.update');
         Route::delete('/{vehicule}', [VehiculeController::class, 'destroy'])->name('vehicules.destroy');
     });
-    //vehicules end
-    // Route::resource('Diagnostics',DiagnosticsController::class);
 
+    // Diagnostics
     Route::prefix('Diagnostics')->group(function () {
         Route::get('/', [DiagnosticsController::class, 'index'])->name('Diagnostics.index');
         Route::get('/create', [DiagnosticsController::class, 'create'])->name('Diagnostics.create');
@@ -59,34 +71,8 @@ Route::view('/', 'welcome');
         Route::get('/generate-pdf/{diagnostic}', [DiagnosticsController::class, 'generatePdf'])->name('diagnostics.generate-pdf');
     });
 
-    // Route::resource('Facteur',FacteurController::class);
-    
-    Route::get('/login', [AuthController::class, 'showLogin'])->name('login');
-    Route::post('/login', [AuthController::class, 'login']);
-    
-    Route::get('/register', [AuthController::class, 'showRegister'])->name('register');
-    Route::post('/register', [AuthController::class, 'register']);
-    
-    // Password Reset Routes
-    Route::get('/forgot-password', [PasswordResetController::class, 'showResetPassword'])->name('password.request');
-    Route::post('/forgot-password', [PasswordResetController::class, 'sendResetLink'])->name('password.email');
-    Route::get('/resetpassword/{token}', [PasswordResetController::class, 'showResetForm'])->name('password.reset');
-    Route::post('/resetpassword', [PasswordResetController::class, 'updatePassword'])->name('password.update');
+    // Dashboard
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
-    // Route::get('/dashboard', function () {
-    //     return view('dashboard'); 
-    // })->middleware('auth')->name('dashboard');
-    
-    Route::get('/logout', [AuthController::class, 'logout'])->name('logout');
-
-    Route::get('/forbidden', function(){
-           return view('forbidden');
-    })->name('forbidden');
-
-    Route::get('/404', function(){
-         return view('404');
-    })->name('404');
-
-// });
+});
 
 require __DIR__.'/auth.php';

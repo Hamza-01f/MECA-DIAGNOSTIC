@@ -8,9 +8,18 @@ use Illuminate\Support\Facades\Hash;
 use App\Models\User;
 use App\Http\Requests\LoginRequest;
 use App\Http\Requests\RegisterRequest;
+use App\Repositories\Interfaces\AuthRepositoryInterface;
+
 
 class AuthController extends Controller
 {
+    protected $authRepository;
+
+
+    public function __construct(AuthRepositoryInterface $authRepository){
+       $this->authRepository = $authRepository;
+    }
+
     public function showLogin()
     {
         return view('login');
@@ -26,7 +35,7 @@ class AuthController extends Controller
     {
         $credentials = $request->validated();
 
-        if (Auth::attempt($credentials)) {
+        if ($this->authRepository->attemptLogin($credentials)) {
             return redirect()->route('dashboard');
         }
 
@@ -35,20 +44,13 @@ class AuthController extends Controller
 
     public function register(RegisterRequest $request)
     {
-        $request->validated();
-      
-        User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => Hash::make($request->password)
-        ]);
-
+        $this->authRepository->createUser($request->validated());
         return redirect()->route('login')->with('success', 'Compte créé avec succès.');
     }
 
     public function logout()
     {
-        Auth::logout();
+        $this->authRepository->logout();
         return view('welcome');
     }
 }
