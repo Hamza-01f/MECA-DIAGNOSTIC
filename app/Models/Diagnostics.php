@@ -50,13 +50,13 @@ class Diagnostics extends Model
     }
     
 
-    public function getStatusAttribute($value)
-    {
-        return str_replace('_', ' ', $value);
-    }
+    // public function getStatusAttribute($value)
+    // {
+    //     return str_replace('_', ' ', $value);
+    // }
 
-    public function setStatusAttribute($value)
-    {
-        $this->attributes['status'] = str_replace(' ', '_', $value);
-    }
+    // public function setStatusAttribute($value)
+    // {
+    //     $this->attributes['status'] = str_replace(' ', '_', $value);
+    // }
 }

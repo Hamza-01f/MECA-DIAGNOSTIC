@@ -291,7 +291,7 @@
                 </div>
             </form>
         </div>
-            <!-- Add this right before the closing </div> of the main container -->
+           
     </div>
  
     <style>
@@ -342,34 +342,11 @@
             modal.querySelector('.bg-white').classList.remove('animate-fadeIn');
         }
 
-        // Click outside modal to close
+       
         document.getElementById('addVehicleModal').addEventListener('click', function(e) {
             if (e.target === this) {
                 closeModal();
             }
         });
-
-        // Search with debounce
-        document.addEventListener('DOMContentLoaded', function() {
-            const searchInput = document.querySelector('input[name="search"]');
-            let typingTimer;
-            
-            if (searchInput) {
-                searchInput.addEventListener('keyup', function() {
-                    clearTimeout(typingTimer);
-                    typingTimer = setTimeout(() => {
-                        this.form.submit();
-                    }, 500);
-                });
-                
-                searchInput.addEventListener('keydown', function() {
-                    clearTimeout(typingTimer);
-                });
-            }
-
-            @if($errors->any())
-            openModal();
-            @endif
-        }); 
     </script>
 @endsection

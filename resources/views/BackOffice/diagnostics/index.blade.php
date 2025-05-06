@@ -85,6 +85,7 @@
                 <input 
                     type="text" 
                     name="search"
+                    {{-- <!-- checks if search is active or not --> --}}
                     value="{{ request('search') }}"
                     class="w-full pl-10 pr-10 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500 shadow-sm" 
                     placeholder="Rechercher..."
@@ -135,7 +136,6 @@
                     <div class="relative">
                         <select name="status" class="w-full border border-gray-300 rounded-lg px-3 py-2 appearance-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
                             <option value="">Tous les statuts</option>
-                            <option value="en_attente" {{ request('status') == 'en_attente' ? 'selected' : '' }}>En Attente</option>
                             <option value="en_cours" {{ request('status') == 'en_cours' ? 'selected' : '' }}>En Cours</option>
                             <option value="complete" {{ request('status') == 'complete' ? 'selected' : '' }}>Complété</option>
                         </select>
@@ -232,28 +232,6 @@
                 </div>
             </div>
         </div>
-        
-        <!-- En Attente Card -->
-        {{-- <div class="card-stats bg-white rounded-xl shadow-md p-6 border-l-4 border-yellow-500">
-            <div class="flex justify-between items-start">
-                <div>
-                    <p class="text-gray-500 font-medium">En Attente</p>
-                    <h3 class="text-3xl font-bold mt-2 text-gray-800">{{ $stats['en_attente'] }}</h3>
-                </div>
-                <div class="bg-yellow-100 p-3 rounded-full">
-                    <i class="fas fa-clock text-yellow-500 text-xl"></i>
-                </div>
-            </div>
-            <div class="mt-4 flex items-center">
-                <i class="fas fa-spinner fa-spin mr-2 text-yellow-500"></i>
-                <p class="text-yellow-500 text-sm">En traitement</p>
-            </div>
-            <div class="mt-2">
-                <div class="h-1 w-full bg-gray-200 rounded-full">
-                    <div class="h-1 bg-yellow-500 rounded-full" style="width: {{ $stats['total'] > 0 ? ($stats['en_attente'] / $stats['total'] * 100) : 0 }}%"></div>
-                </div>
-            </div>
-        </div> --}}
         
         <!-- Complétés Card -->
         <div class="card-stats bg-white rounded-xl shadow-md p-6 border-l-4 border-green-500">
@@ -361,10 +339,10 @@
                                 <span class="status-badge status-complete">
                                     <i class="fas fa-check-circle"></i> Complété
                                 </span>
-                            @elseif($diagnostic->status === 'en_attente') 
+                            {{-- @elseif($diagnostic->status === 'en_attente') 
                                 <span class="status-badge status-waiting">
                                     <i class="fas fa-clock"></i> En Attente
-                                </span>
+                                </span> --}}
                             @else  
                                 <span class="status-badge status-progress">
                                     <i class="fas fa-sync-alt fa-spin"></i> En cours
@@ -388,13 +366,13 @@
                                 <a href="{{ route('Diagnostics.edit', $diagnostic->id) }}" class="action-icon bg-yellow-100 hover:bg-yellow-200 text-yellow-600" title="Modifier">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('Diagnostics.destroy', $diagnostic->id) }}" method="POST" class="inline">
+                                {{-- <form action="{{ route('Diagnostics.destroy', $diagnostic->id) }}" method="POST" class="inline">
                                     @csrf
                                     @method('DELETE')
                                     <button type="submit" class="action-icon bg-red-100 hover:bg-red-200 text-red-600" title="Supprimer" onclick="return confirm('Êtes-vous sûr de vouloir supprimer ce diagnostic?')">
                                         <i class="fas fa-trash"></i>
                                     </button>
-                                </form>
+                                </form> --}}
                                 <a href="{{ route('diagnostics.generate-pdf', $diagnostic->id) }}" class="action-icon bg-green-100 hover:bg-green-200 text-green-600" title="Générer PDF">
                                     <i class="fas fa-file-pdf"></i>
                                 </a>
@@ -412,32 +390,4 @@
         </div>
         @endif
     </div>
-@endsection
-
-@section('scripts')
-<script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const searchInput = document.querySelector('input[name="search"]');
-        let typingTimer;
-        
-        searchInput.addEventListener('keyup', function() {
-            clearTimeout(typingTimer);
-            typingTimer = setTimeout(() => {
-                this.form.submit();
-            }, 500);
-        });
-        
-       
-        const statsCards = document.querySelectorAll('.card-stats');
-        statsCards.forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-5px)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0)';
-            });
-        });
-    });
-</script>
 @endsection

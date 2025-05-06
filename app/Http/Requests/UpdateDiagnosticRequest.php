@@ -25,7 +25,7 @@ class UpdateDiagnosticRequest extends FormRequest
             'client_id' => 'required|exists:clients,id',
             'vehicule_id' => 'required|exists:vehicules,id',
             'service_id' => 'required|exists:services,id',
-            'date' => 'required|date',
+            'date' => 'required|date|before_or_equal:today',
             'status' => 'required|in:en_attente,complete,en_cours',
         ];
     }
@@ -41,6 +41,7 @@ class UpdateDiagnosticRequest extends FormRequest
             'date.required' => 'Le champ date est obligatoire.',
             'date.date' => 'La date doit être une date valide.',
             'status.required' => 'Le champ statut est obligatoire.',
+            'date.before_or_equal' => 'La date de dernière visite ne peut pas être dans le futur.',
             'status.in' => 'Le statut sélectionné est invalide.',
         ];
     }

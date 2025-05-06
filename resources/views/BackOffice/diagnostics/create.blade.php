@@ -98,7 +98,6 @@
                 <div>
                     <label class="block text-sm font-medium text-gray-700">Statut</label>
                     <select name="status" class="mt-1 block w-full border border-gray-300 rounded-md shadow-sm py-2 px-3 focus:outline-none focus:ring-blue-500 focus:border-blue-500 @error('status') border-red-500 @enderror">
-                        <option value="en_attente" {{ old('status', isset($diagnostic) ? $diagnostic->status : '') == 'en_attente' ? 'selected' : '' }}>En Attente</option>
                         <option value="complete" {{ old('status', isset($diagnostic) ? $diagnostic->status : '') == 'complete' ? 'selected' : '' }}>Complété</option>
                         <option value="en_cours" {{ old('status', isset($diagnostic) ? $diagnostic->status : '') == 'en_cours' ? 'selected' : '' }}>En cours</option>
                     </select>
@@ -119,18 +118,4 @@
         </form>
     </div>
 </div>
-
-<script>
-    document.getElementById('client_id').addEventListener('change', function() {
-        const clientId = this.value;
-        const vehicleSelect = document.getElementById('vehicule_id');
-        
-        vehicleSelect.innerHTML = '<option value="">Sélectionner un véhicule</option>';
-        
-    });
-
-    @if(isset($diagnostic) && $diagnostic->client_id)
-        document.getElementById('client_id').dispatchEvent(new Event('change'));
-    @endif
-</script>
 @endsection
